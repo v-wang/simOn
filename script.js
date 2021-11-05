@@ -2,13 +2,13 @@
 
 // get all individual color pieces
 const colorPieces = document.querySelectorAll(".color-piece");
-console.log(colorPieces);
+// console.log(colorPieces);
 
 // SIMON SIDE
 // NOTE: The following lines are related to Simon and covers basic functionality of the game. Random numbers are being created. Those numbers are being translated to color strings.
 
 // test simon sequence
-let testSeq = [1, 16];
+// let testSeq = [1, 16];
 
 // Simon sequence holder
 let simonNumSequence = [];
@@ -55,8 +55,8 @@ function numToColor(arr) {
 // test to see if numbers are translating correctly into an array of color strings
 // console.log(numToColor(randomNum(2)));
 let sLength = 2;
-let simonStartColorSequence = numToColor(randomNum(sLength));
-console.log(simonStartColorSequence);
+let simonColorSequence = numToColor(randomNum(sLength));
+console.log(simonColorSequence);
 
 // PLAYER SIDE
 // NOTE:
@@ -69,13 +69,15 @@ function seqChecker(slice) {
   // console.log(cPieceValue);
   // console.log(simonStartColorSequence);
 
-  if (cPieceValue == simonStartColorSequence[simonIndex]) {
-    if (simonIndex == simonStartColorSequence.length - 1) {
-      console.log("nice, you won this round!");
+  if (cPieceValue == simonColorSequence[simonIndex]) {
+    if (simonIndex == simonColorSequence.length - 1) {
+      console.log("nice, you won this round! get ready for the next one!");
       sLength += 1;
       // console.log(sLength);
-      simonStartColorSequence = numToColor(randomNum(sLength));
-      console.log(simonStartColorSequence);
+      setTimeout(() => {
+        simonColorSequence = numToColor(randomNum(sLength));
+        console.log(simonColorSequence);
+      }, 3000);
 
       return (simonIndex = 0);
     }
@@ -84,8 +86,8 @@ function seqChecker(slice) {
     console.log("you got it wrong, game over");
     sLength = 2;
     // console.log((simonStartColorSequence = numToColor(randomNum(sLength))));
-    simonStartColorSequence = numToColor(randomNum(sLength));
-    console.log(simonStartColorSequence);
+    simonColorSequence = numToColor(randomNum(sLength));
+    console.log(simonColorSequence);
     return (simonIndex = 0);
   }
 }
@@ -97,9 +99,6 @@ colorPieces.forEach((cPiece) => {
     seqChecker(cPiece);
   });
 });
-
-let playerPassSample = ["purple", "red"];
-let playerFailSample = ["purple", "blue"];
 
 // LEGACY (SAVE FOR BACKUP)
 // // click event added to each color piece for player functionality
