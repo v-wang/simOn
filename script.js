@@ -4,13 +4,6 @@
 const colorPieces = document.querySelectorAll(".color-piece");
 console.log(colorPieces);
 
-// click event added to each color piece for player functionality
-colorPieces.forEach((cPiece) => {
-  cPiece.addEventListener("click", (event) => {
-    event.preventDefault();
-  });
-});
-
 // SIMON SIDE
 // NOTE: The following lines are related to Simon and covers basic functionality of the game. Random numbers are being created. Those numbers are being translated to color strings.
 
@@ -65,5 +58,19 @@ console.log(numToColor(randomNum(2)));
 // PLAYER SIDE
 // NOTE:
 
+// click event added to each color piece for player functionality
+colorPieces.forEach((cPiece) => {
+  cPiece.addEventListener("click", (event) => {
+    event.preventDefault();
+
+    // record player color selection
+    console.log(cPiece.getAttribute("id"));
+  });
+});
+
 let playerPassSample = ["purple", "red"];
 let playerFailSample = ["purple", "blue"];
+
+// function seqChecker(seq1, seq2, value) {
+//   for ()
+// }
