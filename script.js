@@ -72,7 +72,13 @@ colorPieces.forEach((cPiece) => {
     // console.log(cPiece.getAttribute("id"));
 
     let cPieceValue = cPiece.getAttribute("id");
+
     if (cPieceValue == simonColorSequence[simonIndex]) {
+      if (simonIndex == simonColorSequence.length - 1) {
+        console.log("nice, you won this round!");
+        simonColorSequence = numToColor(randomNum(2 + 1));
+        return (simonIndex = 0);
+      }
       return simonIndex++;
     } else {
       console.log("you got it wrong");
