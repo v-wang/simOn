@@ -7,9 +7,6 @@ const colorPieces = document.querySelectorAll(".color-piece");
 // get new game button
 const newGameButton = document.querySelector("#new-game");
 
-// get score num
-let scoreNumElem = document.querySelector("#score-num");
-
 // SIMON SIDE
 // NOTE: The following lines are related to Simon and covers basic functionality of the game. Random numbers are being created. Those numbers are being translated to color strings.
 
@@ -26,7 +23,8 @@ let simonColorSequence = [];
 // the index used to check player selection against simon sequence
 let simonIndex = 0;
 
-// generation block - part 1 of creating a sequence
+// GENERATION BLOCK
+// part 1 of creating simon sequence
 // Simon sequence random num generator
 function randomNumGen(count) {
   for (let i = 0; i < count; i++) {
@@ -37,7 +35,8 @@ function randomNumGen(count) {
   return simonNumSequence;
 }
 
-// translation block - part 2 of creating a sequence
+// TRANSLATION BLOCK
+// part 2 of creating simon sequence
 // translating number sequence into color sequence
 function numToColor(arr) {
   let colorSequence = [];
@@ -65,14 +64,15 @@ function numToColor(arr) {
   return colorSequence;
 }
 
-// run block - part 3 of creating a sequence
+// RUN BLOCK
+// part 3 of creating simon sequence
 // putting it all together (num gen and translation)
 function runSequence() {
   let randomNums = randomNumGen(seqLength);
   return numToColor(randomNums);
 }
 
-// create flashing effect
+// COLOR FLASHING EFFECT
 function animateColor(color) {
   color.classList.add("shimmer");
   setTimeout(() => {
@@ -80,17 +80,15 @@ function animateColor(color) {
   }, 500);
 }
 
-// generating simon sequence for first level
-// will be updated to a longer sequence if player wins round
-
-// console.log(simonColorSequence);
-
 // PLAYER SIDE
 // NOTE: Up to this point, Simon color sequence is already generated and awaiting user input to check
 
-// checks if player color selection is correct
-// 'slice' term is used to avoid excess use of 'color' and 'piece'
+// GLOBAL VARIABLES RELATED TO PLAYER
+// get score num
+let scoreNumElem = document.querySelector("#score-num");
+
 // MAIN BLOCK FOR GAME LOGIC
+// checks if player color selection is correct
 function seqChecker(slice) {
   // getting value, ex: "blue"
   let cPieceValue = slice.getAttribute("id");
@@ -129,7 +127,7 @@ function seqChecker(slice) {
   }
 }
 
-// click event to start a new game
+// START NEW GAME
 newGameButton.addEventListener("click", (event) => {
   event.preventDefault();
   scoreNumElem.innerText = 0;
@@ -145,7 +143,7 @@ newGameButton.addEventListener("click", (event) => {
   }, 1500);
 });
 
-// click event added to each color piece for player functionality
+// PLAYER COLOR SELECTION
 colorPieces.forEach((cPiece) => {
   cPiece.addEventListener("click", (event) => {
     event.preventDefault();
