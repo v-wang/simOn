@@ -84,25 +84,41 @@ function animateColor(color) {
 // NOTE: Up to this point, Simon color sequence is already generated and awaiting user input to check
 
 // GLOBAL VARIABLES RELATED TO PLAYER
-// get score num
+// get score num element
 let scoreNumElem = document.querySelector("#score-num");
+
+// get level elem
+let levelElem = document.querySelector("#level");
+
+// player level - default it set to level 1
+let playerLevel = 1;
+
+// player score - default set to 0
+let playerScore = 0;
 
 // MAIN BLOCK FOR GAME LOGIC
 // checks if player color selection is correct
 function seqChecker(slice) {
-  // getting value, ex: "blue"
+  // getting color id, ex: "blue"
   let cPieceValue = slice.getAttribute("id");
-  let scoreNum = parseInt(scoreNumElem.innerText);
+
   // checking player color selection against simon
   if (cPieceValue == simonColorSequence[simonIndex]) {
     if (simonIndex == simonColorSequence.length - 1) {
       console.log("nice, you won this round! get ready for the next one!");
-      scoreNum += 10;
-      scoreNumElem.innerText = scoreNum;
-      seqLength += 1;
 
+      // update player score after win
+      playerScore += 10;
+      playerLevel += 1;
+      scoreNumElem.innerText = playerScore;
+      levelElem.innerText = `Level ${playerLevel}`;
+
+      // setting next level and increasing difficulty
+      seqLength += 1;
       simonColorSequence = numToColor(randomNumGen(seqLength));
       console.log(simonColorSequence);
+
+      // small pause before colors light up
       setTimeout(() => {
         simonColorSequence.forEach((color, i) => {
           let colorElem = document.querySelector(`#${color}`);
@@ -127,12 +143,18 @@ function seqChecker(slice) {
   }
 }
 
-// START NEW GAME
+// START NEW GAME ON CLICK
 newGameButton.addEventListener("click", (event) => {
   event.preventDefault();
+
+  // reset score and level
   scoreNumElem.innerText = 0;
+  levelElem.innerText = "Level 1";
+
   simonColorSequence = runSequence();
   console.log(simonColorSequence);
+
+  // animate!
   setTimeout(() => {
     simonColorSequence.forEach((color, i) => {
       let colorElem = document.querySelector(`#${color}`);
@@ -143,7 +165,7 @@ newGameButton.addEventListener("click", (event) => {
   }, 1500);
 });
 
-// PLAYER COLOR SELECTION
+// CHECK PLAYER COLOR CHOICES ON CLICK
 colorPieces.forEach((cPiece) => {
   cPiece.addEventListener("click", (event) => {
     event.preventDefault();
