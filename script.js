@@ -4,18 +4,26 @@
 const colorPieces = document.querySelectorAll(".color-piece");
 // console.log(colorPieces);
 
+// get new game button
+const newGameButton = document.querySelector("#new-game");
+
 // SIMON SIDE
 // NOTE: The following lines are related to Simon and covers basic functionality of the game. Random numbers are being created. Those numbers are being translated to color strings.
 
-// test simon sequence
-// let testSeq = [1, 16];
-
+// GLOBAL VARIABLES RELATED TO SIMON
 // Simon sequence holder
 let simonNumSequence = [];
 
+// starting sequence length for Simon
+let seqLength = 2;
+
+// the index used to check player selection against simon sequence
+let simonIndex = 0;
+
+// generation block - part 1 of creating a sequence
 // Simon sequence random num generator
-function randomNum(num) {
-  for (let i = 0; i < num; i++) {
+function randomNumGen(count) {
+  for (let i = 0; i < count; i++) {
     // random num is multipled by 31 to increase outcome of repeated color
     let genNum = Math.floor(Math.random() * 31);
     simonNumSequence.push(genNum);
@@ -23,10 +31,9 @@ function randomNum(num) {
   return simonNumSequence;
 }
 
+// translation block - part 2 of creating a sequence
 // translating number sequence into color sequence
 function numToColor(arr) {
-  // console.log(simonNumSequence);
-
   let colorSequence = [];
   for (let i = 0; i < arr.length; i++) {
     if (arr[i] >= 0 && arr[i] <= 5) {
@@ -52,30 +59,34 @@ function numToColor(arr) {
   return colorSequence;
 }
 
-// test to see if numbers are translating correctly into an array of color strings
-// console.log(numToColor(randomNum(2)));
-let sLength = 2;
-let simonColorSequence = numToColor(randomNum(sLength));
+// run block - part 3 of creating a sequence
+// putting it all together (num gen and translation)
+function runSequence() {
+  let randomNums = randomNumGen(seqLength);
+  return numToColor(randomNums);
+}
+
+// generating simon sequence for first level
+// will be updated to a longer sequence if player wins round
+let simonColorSequence = runSequence();
 console.log(simonColorSequence);
 
 // PLAYER SIDE
-// NOTE:
+// NOTE: Up to this point, Simon color sequence is already generated and awaiting user input to check
 
-// so we know when the user clicks on a piece, we can align that with the right color in the sequence
-let simonIndex = 0;
+// checks if player color selection is correct
+// 'slice' term is used to avoid excess use of 'color' and 'piece'
 function seqChecker(slice) {
+  // getting value, ex: "blue"
   let cPieceValue = slice.getAttribute("id");
-  // console.log(simonIndex);
-  // console.log(cPieceValue);
-  // console.log(simonStartColorSequence);
 
+  // checking player color selection against simon
   if (cPieceValue == simonColorSequence[simonIndex]) {
     if (simonIndex == simonColorSequence.length - 1) {
       console.log("nice, you won this round! get ready for the next one!");
-      sLength += 1;
-      // console.log(sLength);
+      seqLength += 1;
       setTimeout(() => {
-        simonColorSequence = numToColor(randomNum(sLength));
+        simonColorSequence = numToColor(randomNumGen(seqLength));
         console.log(simonColorSequence);
       }, 3000);
 
@@ -84,13 +95,19 @@ function seqChecker(slice) {
     return simonIndex++;
   } else {
     console.log("you got it wrong, game over");
-    sLength = 2;
-    // console.log((simonStartColorSequence = numToColor(randomNum(sLength))));
-    simonColorSequence = numToColor(randomNum(sLength));
+    seqLength = 2;
+
+    simonColorSequence = numToColor(randomNumGen(seqLength));
     console.log(simonColorSequence);
+
     return (simonIndex = 0);
   }
 }
+
+// click event to start a new game
+newGameButton.addEventListener("click", (event) => {
+  event.preventDefault();
+});
 
 // click event added to each color piece for player functionality
 colorPieces.forEach((cPiece) => {
