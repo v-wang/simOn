@@ -73,12 +73,15 @@ colorPieces.forEach((cPiece) => {
     // console.log(cPiece.getAttribute("id"));
 
     let cPieceValue = cPiece.getAttribute("id");
+    // console.log(simonIndex);
+    // console.log(cPieceValue);
+    // console.log(simonStartColorSequence);
 
     if (cPieceValue == simonStartColorSequence[simonIndex]) {
       if (simonIndex == simonStartColorSequence.length - 1) {
         console.log("nice, you won this round!");
         sLength += 1;
-        console.log(sLength);
+        // console.log(sLength);
         simonStartColorSequence = numToColor(randomNum(sLength));
         console.log(simonStartColorSequence);
 
@@ -86,8 +89,19 @@ colorPieces.forEach((cPiece) => {
       }
       return simonIndex++;
     } else {
-      console.log("you got it wrong");
+      console.log("you got it wrong, game over");
+      sLength = 2;
+      // console.log((simonStartColorSequence = numToColor(randomNum(sLength))));
+      simonStartColorSequence = numToColor(randomNum(sLength));
+      console.log(simonStartColorSequence);
+      return (simonIndex = 0);
     }
+    // running into issue with app recognizing user input on new sequence (says its wrong even though it looks right in cl)
+
+    // console.log(simonIndex);
+    // console.log(cPieceValue);
+
+    // new color sequence needs to start here and shown to player
   });
 });
 
