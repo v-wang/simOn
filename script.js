@@ -8,4 +8,19 @@ colorPieces.forEach((cPiece) => {
   });
 });
 
-// Simon Sequence Generator
+// test simon sequence
+let testSeq = [1, 2];
+
+// Simon sequence holder
+let simonSequence = [];
+
+// Simon sequence random num generator
+function randomNum(num) {
+  for (let i = 0; i < num; i++) {
+    let genNum = Math.floor(Math.random() * 31);
+    simonSequence.push(genNum);
+  }
+}
+
+randomNum(2);
+console.log(simonSequence);
