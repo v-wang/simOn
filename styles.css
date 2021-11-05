@@ -5,7 +5,57 @@
   box-sizing: border-box;
 }
 
+/* TOP SECTION */
+/* GAME TITLE, LEVEL NUM, SCORE */
 header {
-  display: inline-block;
-  border: 1px solid red;
+  display: flex;
+  width: 100vw;
+  /* border: 1px solid red; */
 }
+
+/* GAME SECTION */
+/* COLOR WHEEL, INDIVIDUAL COLOR PIECES, NEW GAME BUTTON */
+main {
+  width: 60vw;
+  height: 600px;
+  border: 1px solid red;
+  margin: 0 auto;
+}
+
+#color-wheel {
+  width: 60%;
+  margin: 0 auto;
+  height: 500px;
+  border: 1px solid green;
+}
+
+.color-piece {
+  width: 70px;
+  height: 70px;
+  border: 1px solid black;
+}
+
+#purple {
+  background-color: #5f27cd;
+}
+
+#orange {
+  background-color: #ff793f;
+}
+
+#red {
+  background-color: #ff5252;
+}
+
+#blue {
+  background-color: #2e86de;
+}
+
+#yellow {
+  background-color: #feca57;
+}
+
+#green {
+  background-color: #1dd1a1;
+}
+/* FOOTER SECTION */
