@@ -27,44 +27,56 @@ function randomNum(num) {
 function numToColor(arr) {
   console.log(simonNumSequence);
 
-  let simonColorSequence = [];
+  let colorSequence = [];
   for (let i = 0; i < arr.length; i++) {
     if (arr[i] >= 0 && arr[i] <= 5) {
       arr[i] = "purple";
-      simonColorSequence.push(arr[i]);
+      colorSequence.push(arr[i]);
     } else if (arr[i] > 5 && arr[i] <= 10) {
       arr[i] = "orange";
-      simonColorSequence.push(arr[i]);
+      colorSequence.push(arr[i]);
     } else if (arr[i] > 10 && arr[i] <= 15) {
       arr[i] = "red";
-      simonColorSequence.push(arr[i]);
+      colorSequence.push(arr[i]);
     } else if (arr[i] > 15 && arr[i] <= 20) {
       arr[i] = "blue";
-      simonColorSequence.push(arr[i]);
+      colorSequence.push(arr[i]);
     } else if (arr[i] > 20 && arr[i] <= 25) {
       arr[i] = "yellow";
-      simonColorSequence.push(arr[i]);
+      colorSequence.push(arr[i]);
     } else if (arr[i] > 25 && arr[i] <= 30) {
       arr[i] = "green";
-      simonColorSequence.push(arr[i]);
+      colorSequence.push(arr[i]);
     }
   }
-  return simonColorSequence;
+  return colorSequence;
 }
 
 // test to see if numbers are translating correctly into an array of color strings
-console.log(numToColor(randomNum(2)));
+// console.log(numToColor(randomNum(2)));
+let simonColorSequence = numToColor(randomNum(2));
+console.log(simonColorSequence);
 
 // PLAYER SIDE
 // NOTE:
+
+// so we know when the user clicks on a piece, we can align that with the right color in the sequence
+let simonIndex = 0;
 
 // click event added to each color piece for player functionality
 colorPieces.forEach((cPiece) => {
   cPiece.addEventListener("click", (event) => {
     event.preventDefault();
 
-    // record player color selection
-    console.log(cPiece.getAttribute("id"));
+    // test to see if color being captured
+    // console.log(cPiece.getAttribute("id"));
+
+    let cPieceValue = cPiece.getAttribute("id");
+    if (cPieceValue == simonColorSequence[simonIndex]) {
+      return simonIndex++;
+    } else {
+      console.log("you got it wrong");
+    }
   });
 });
 
