@@ -11,11 +11,14 @@ const newGameButton = document.querySelector("#new-game");
 // NOTE: The following lines are related to Simon and covers basic functionality of the game. Random numbers are being created. Those numbers are being translated to color strings.
 
 // GLOBAL VARIABLES RELATED TO SIMON
+// starting sequence length for Simon
+let seqLength = 2;
+
 // Simon sequence holder
 let simonNumSequence = [];
 
-// starting sequence length for Simon
-let seqLength = 2;
+// color sequence holder
+let simonColorSequence = [];
 
 // the index used to check player selection against simon sequence
 let simonIndex = 0;
@@ -66,10 +69,18 @@ function runSequence() {
   return numToColor(randomNums);
 }
 
+// create flashing effect
+function animateColor(color) {
+  color.classList.add("shimmer");
+  setTimeout(() => {
+    color.classList.toggle("shimmer");
+  }, 500);
+}
+
 // generating simon sequence for first level
 // will be updated to a longer sequence if player wins round
-let simonColorSequence = runSequence();
-console.log(simonColorSequence);
+
+// console.log(simonColorSequence);
 
 // PLAYER SIDE
 // NOTE: Up to this point, Simon color sequence is already generated and awaiting user input to check
@@ -107,6 +118,14 @@ function seqChecker(slice) {
 // click event to start a new game
 newGameButton.addEventListener("click", (event) => {
   event.preventDefault();
+  simonColorSequence = runSequence();
+  console.log(simonColorSequence);
+  simonColorSequence.forEach((color, i) => {
+    let colorElem = document.querySelector(`#${color}`);
+    setTimeout(() => {
+      animateColor(colorElem);
+    }, i * 1000);
+  });
 });
 
 // click event added to each color piece for player functionality
