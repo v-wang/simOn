@@ -12,7 +12,7 @@ Simon, a memory game, is a version of Simon Says. At the start of each round, Si
 2. Watch as Simon presents a sequence of colors
    - Simon will start Level 1 by showing two colors
    - Note that difficulty increases by level
-3. At the end of his turn, the player will repeat the sequence by selecting the colors on the wheel
+3. At the end of Simon's turn, the player will repeat the sequence by selecting the colors on the wheel
 4. If the player repeats the sequence correctly, they proceed to the next level
 5. The game is over if the player fails to repeat the colors in the right order
 
