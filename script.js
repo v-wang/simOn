@@ -96,10 +96,17 @@ function seqChecker(slice) {
     if (simonIndex == simonColorSequence.length - 1) {
       console.log("nice, you won this round! get ready for the next one!");
       seqLength += 1;
+
+      simonColorSequence = numToColor(randomNumGen(seqLength));
+      console.log(simonColorSequence);
       setTimeout(() => {
-        simonColorSequence = numToColor(randomNumGen(seqLength));
-        console.log(simonColorSequence);
-      }, 3000);
+        simonColorSequence.forEach((color, i) => {
+          let colorElem = document.querySelector(`#${color}`);
+          setTimeout(() => {
+            animateColor(colorElem);
+          }, i * 1000);
+        });
+      }, 1500);
 
       return (simonIndex = 0);
     }
