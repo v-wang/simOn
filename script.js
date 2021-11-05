@@ -1,15 +1,21 @@
+// DOM ELEMENTS
+
 // get all individual color pieces
 const colorPieces = document.querySelectorAll(".color-piece");
 console.log(colorPieces);
 
+// click event added to each color piece for player functionality
 colorPieces.forEach((cPiece) => {
   cPiece.addEventListener("click", (event) => {
     event.preventDefault();
   });
 });
 
+// SIMON SIDE
+// NOTE: The following lines are related to Simon and covers basic functionality of the game. Random numbers are being created. Those numbers are being translated to color strings.
+
 // test simon sequence
-let testSeq = [1, 2];
+let testSeq = [1, 16];
 
 // Simon sequence holder
 let simonNumSequence = [];
@@ -17,6 +23,7 @@ let simonNumSequence = [];
 // Simon sequence random num generator
 function randomNum(num) {
   for (let i = 0; i < num; i++) {
+    // random num is multipled by 31 to increase outcome of repeated color
     let genNum = Math.floor(Math.random() * 31);
     simonNumSequence.push(genNum);
   }
@@ -52,7 +59,11 @@ function numToColor(arr) {
   return simonColorSequence;
 }
 
+// test to see if numbers are translating correctly into an array of color strings
 console.log(numToColor(randomNum(2)));
 
-// translating player color sequence to number sequence
-// function colorToNum(arr) {}
+// PLAYER SIDE
+// NOTE:
+
+let playerPassSample = ["purple", "red"];
+let playerFailSample = ["purple", "blue"];
