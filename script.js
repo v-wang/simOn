@@ -25,7 +25,7 @@ function randomNum(num) {
 
 // translating number sequence into color sequence
 function numToColor(arr) {
-  console.log(simonNumSequence);
+  // console.log(simonNumSequence);
 
   let colorSequence = [];
   for (let i = 0; i < arr.length; i++) {
@@ -54,8 +54,9 @@ function numToColor(arr) {
 
 // test to see if numbers are translating correctly into an array of color strings
 // console.log(numToColor(randomNum(2)));
-let simonColorSequence = numToColor(randomNum(2));
-console.log(simonColorSequence);
+let sLength = 2;
+let simonStartColorSequence = numToColor(randomNum(sLength));
+console.log(simonStartColorSequence);
 
 // PLAYER SIDE
 // NOTE:
@@ -73,10 +74,14 @@ colorPieces.forEach((cPiece) => {
 
     let cPieceValue = cPiece.getAttribute("id");
 
-    if (cPieceValue == simonColorSequence[simonIndex]) {
-      if (simonIndex == simonColorSequence.length - 1) {
+    if (cPieceValue == simonStartColorSequence[simonIndex]) {
+      if (simonIndex == simonStartColorSequence.length - 1) {
         console.log("nice, you won this round!");
-        simonColorSequence = numToColor(randomNum(2 + 1));
+        sLength += 1;
+        console.log(sLength);
+        simonStartColorSequence = numToColor(randomNum(sLength));
+        console.log(simonStartColorSequence);
+
         return (simonIndex = 0);
       }
       return simonIndex++;
