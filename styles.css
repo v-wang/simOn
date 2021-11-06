@@ -23,29 +23,22 @@ main {
 }
 
 #color-wheel {
-  width: 200px;
+  width: 500px;
+  height: 500px;
   margin: 0 auto;
-  height: 200px;
   position: relative;
   overflow: hidden;
-  border: 1px solid green;
 }
 
-#color-wheel > * {
+.color-piece {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  border: 50px solid red;
+  /* border: 1px solid #636e72; */
   border-radius: 50%;
-  clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 33.745%);
-}
-
-.color-piece {
-  /* width: 70px;
-  height: 70px;
-  border: 1px solid black; */
+  clip-path: polygon(50% 50%, 60% 0%, 100% 0%, 100% 33.33%);
 }
 
 .shimmer {
@@ -54,31 +47,78 @@ main {
 
 #purple {
   transform: rotate(60deg);
-  background-color: #5f27cd;
+  /* pie shape */
+  /* background-color: #5f27cd; */
+
+  /* donut shape */
+  background: radial-gradient(
+    farthest-side at center,
+    transparent 40%,
+    #5f27cd 40%
+  );
 }
 
 #orange {
   transform: rotate(120deg);
-  background-color: #ff793f;
+  /* pie shape */
+  /* background-color: #ff793f; */
+
+  /* donut shape */
+  background: radial-gradient(
+    farthest-side at center,
+    transparent 40%,
+    #ff793f 40%
+  );
 }
 
 #red {
   transform: rotate(180deg);
-  background-color: #ff5252;
+  /* pie shape */
+  /* background-color: #ff5252; */
+
+  /* donut shape */
+  background: radial-gradient(
+    farthest-side at center,
+    transparent 40%,
+    #ff5252 40%
+  );
 }
 
 #blue {
   transform: rotate(-60deg);
-  background-color: #2e86de;
+  /* pie shape */
+  /* background-color: #2e86de; */
+
+  /* donut shape */
+  background: radial-gradient(
+    farthest-side at center,
+    transparent 40%,
+    #2e86de 40%
+  );
 }
 
 #yellow {
   transform: rotate(-120deg);
-  background-color: #feca57;
+  /* pie shape */
+  /* background-color: #feca57; */
+
+  /* donut shape */
+  background: radial-gradient(
+    farthest-side at center,
+    transparent 40%,
+    #feca57 40%
+  );
 }
 
 #green {
-  transform: rotate(-1800deg);
-  background-color: #1dd1a1;
+  /* pie shape */
+  /* background-color: #1dd1a1; */
+
+  /* donut shape */
+  background: radial-gradient(
+    farthest-side at center,
+    transparent 40%,
+    #1dd1a1 40%
+  );
 }
 /* FOOTER SECTION */
