@@ -5,12 +5,34 @@
   box-sizing: border-box;
 }
 
+/* GENERAL */
+body {
+  font-family: "Nunito", sans-serif;
+}
+
 /* TOP SECTION */
 /* GAME TITLE, LEVEL NUM, SCORE */
 header {
-  display: flex;
   width: 100vw;
-  /* border: 1px solid red; */
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+  margin: 25px 0px 70px 0px;
+  border: 1px solid red;
+}
+
+header > * {
+  width: 180px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+header > div > h1 {
+  text-align: center;
+  display: inline;
+}
+
+#score-num {
+  margin-left: 5px;
 }
 
 /* GAME SECTION */
@@ -28,6 +50,7 @@ main {
   margin: 0 auto;
   position: relative;
   overflow: hidden;
+  transform: rotate(18deg);
 }
 
 .color-piece {
