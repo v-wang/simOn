@@ -24,3 +24,7 @@ Development Progress:
 - JavaScript
 - HTML
 - CSS
+
+## Installation
+
+- Remember to include .mp3 files!
