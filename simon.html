@@ -10,11 +10,10 @@
       href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="/resources/styles.css" />
     <title>SIMON</title>
   </head>
   <body>
-    <div id="game-container"></div>
     <header>
       <h1>SimOn</h1>
       <h1 id="level">Level 1</h1>
@@ -24,17 +23,27 @@
       </div>
     </header>
     <main>
+      <div id="timer">30</div>
       <div id="color-wheel">
-        <div class="color-piece" id="purple"></div>
-        <div class="color-piece" id="orange"></div>
-        <div class="color-piece" id="red"></div>
-        <div class="color-piece" id="blue"></div>
-        <div class="color-piece" id="yellow"></div>
-        <div class="color-piece" id="green"></div>
+        <div class="color-piece" id="purple" data="c-note"></div>
+        <div class="color-piece" id="orange" data="d-note"></div>
+        <div class="color-piece" id="red" data="e-note"></div>
+        <div class="color-piece" id="blue" data="f-note"></div>
+        <div class="color-piece" id="yellow" data="g-note"></div>
+        <div class="color-piece" id="green" data="a-note"></div>
       </div>
       <button id="new-game">NEW GAME</button>
     </main>
-    <footer></footer>
-    <script src="script.js"></script>
+    <footer>
+      <h4>GitHub</h4>
+      <img src="/resources/img/gh-logo.png" alt="" />
+    </footer>
+    <audio id="c-note" src="/resources/clips/c-note.mp3"></audio>
+    <audio id="d-note" src="/resources/clips/d-note.mp3"></audio>
+    <audio id="e-note" src="/resources/clips/e-note.mp3"></audio>
+    <audio id="f-note" src="/resources/clips/f-note.mp3"></audio>
+    <audio id="g-note" src="/resources/clips/g-note.mp3"></audio>
+    <audio id="a-note" src="/resources/clips/a-note.mp3"></audio>
+    <script src="/resources/script.js"></script>
   </body>
 </html>

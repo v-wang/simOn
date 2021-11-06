@@ -97,6 +97,18 @@ let playerLevel = 1;
 // player score - default set to 0
 let playerScore = 0;
 
+// timer
+let t = 1;
+function timer(limit) {
+  let timerElem = document.querySelector("#timer");
+  for (let i = limit - 1; i >= 0; i--) {
+    setTimeout(() => {
+      timerElem.innerText = i;
+    }, 1000 * t);
+    t += 1;
+  }
+}
+
 // MAIN BLOCK FOR GAME LOGIC
 // checks if player color selection is correct
 function seqChecker(piece) {
@@ -123,7 +135,14 @@ function seqChecker(piece) {
       setTimeout(() => {
         simonColorSequence.forEach((color, i) => {
           let colorElem = document.querySelector(`#${color}`);
+
+          // play audio for simon sequence
+          let note = colorElem.getAttribute("data");
+          let noteElem = document.querySelector(`#${note}`);
           setTimeout(() => {
+            t = 1;
+            timer(30);
+            noteElem.play();
             animateColor(colorElem);
           }, i * 1000);
         });
@@ -156,11 +175,21 @@ newGameButton.addEventListener("click", (event) => {
   simonColorSequence = runSequence();
   console.log(simonColorSequence);
 
+  // start timer
+  t = 1;
+  timer(30);
+
   // animate!
   setTimeout(() => {
     simonColorSequence.forEach((color, i) => {
       let colorElem = document.querySelector(`#${color}`);
+
+      // play audio for simon sequence
+      let note = colorElem.getAttribute("data");
+      let noteElem = document.querySelector(`#${note}`);
+
       setTimeout(() => {
+        noteElem.play();
         animateColor(colorElem);
       }, i * 1000);
     });
@@ -171,6 +200,11 @@ newGameButton.addEventListener("click", (event) => {
 colorPieces.forEach((cPiece) => {
   cPiece.addEventListener("click", (event) => {
     event.preventDefault();
+
+    // play sound
+    let notePiece = cPiece.getAttribute("data");
+    document.getElementById(notePiece).play();
+
     seqChecker(cPiece);
   });
 });
