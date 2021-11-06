@@ -41,6 +41,10 @@ main {
   clip-path: polygon(50% 50%, 60% 0%, 100% 0%, 100% 33.33%);
 }
 
+.color-piece:hover {
+  cursor: help;
+}
+
 .shimmer {
   opacity: 0.5;
 }

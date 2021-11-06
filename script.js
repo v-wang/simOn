@@ -149,6 +149,7 @@ newGameButton.addEventListener("click", (event) => {
   event.preventDefault();
 
   // reset score and level
+  seqLength = 2;
   scoreNumElem.innerText = 0;
   levelElem.innerText = "Level 1";
 
