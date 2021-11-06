@@ -153,7 +153,7 @@ function seqChecker(piece) {
     return simonIndex++;
   } else {
     console.log("you got it wrong, game over");
-
+    newGameButton.classList.toggle("bounce");
     // test code to auto reset after loss
     // seqLength = 2;
     // simonColorSequence = numToColor(randomNumGen(seqLength));
@@ -166,6 +166,9 @@ function seqChecker(piece) {
 // START NEW GAME ON CLICK
 newGameButton.addEventListener("click", (event) => {
   event.preventDefault();
+
+  // remove bounce effect
+  newGameButton.classList.toggle("bounce");
 
   // reset score and level
   seqLength = 2;

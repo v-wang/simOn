@@ -9,6 +9,7 @@
 body {
   font-family: "Nunito", sans-serif;
   color: #2d3436;
+  /* background-color: #f1f2f6; */
 }
 
 /* TOP SECTION */
@@ -24,6 +25,17 @@ header > * {
   width: 180px;
   margin: 0 auto;
   text-align: center;
+}
+
+header img:hover {
+  transition: transform 1.5s;
+  transform: scale(2) translateX(70px) translateY(50px);
+}
+
+.head-on {
+}
+
+.head-off {
 }
 
 header > div > h1 {
@@ -165,6 +177,26 @@ main {
   box-shadow: 1px 5px 9px #95a5a6;
 }
 
+.bounce {
+  animation: bounce 2s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes bounce {
+  0%,
+  20%,
+  50%,
+  80% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-30px);
+  }
+  60% {
+    transform: translateY(-15px);
+  }
+}
+
 #new-game:hover {
   cursor: pointer;
   border-top: 4px solid #ff793f;
@@ -207,4 +239,7 @@ footer > * {
 
 footer img {
   width: 30px;
+}
+
+#simon-head {
 }
