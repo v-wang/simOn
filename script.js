@@ -28,7 +28,7 @@ let simonIndex = 0;
 // Simon sequence random num generator
 function randomNumGen(count) {
   for (let i = 0; i < count; i++) {
-    // random num is multipled by 31 to increase outcome of repeated color
+    // random num is multipled by 31 to increase outcome of color
     let genNum = Math.floor(Math.random() * 31);
     simonNumSequence.push(genNum);
   }
@@ -38,6 +38,7 @@ function randomNumGen(count) {
 // TRANSLATION BLOCK
 // part 2 of creating simon sequence
 // translating number sequence into color sequence
+// tweak ranges later to change probability - can make range variables that change by level
 function numToColor(arr) {
   let colorSequence = [];
   for (let i = 0; i < arr.length; i++) {
@@ -81,7 +82,7 @@ function animateColor(color) {
 }
 
 // PLAYER SIDE
-// NOTE: Up to this point, Simon color sequence is already generated and awaiting user input to check
+// NOTE: Checking each index element of simons sequence and progressing the player, or reset
 
 // GLOBAL VARIABLES RELATED TO PLAYER
 // get score num element
@@ -98,9 +99,9 @@ let playerScore = 0;
 
 // MAIN BLOCK FOR GAME LOGIC
 // checks if player color selection is correct
-function seqChecker(slice) {
+function seqChecker(piece) {
   // getting color id, ex: "blue"
-  let cPieceValue = slice.getAttribute("id");
+  let cPieceValue = piece.getAttribute("id");
 
   // checking player color selection against simon
   if (cPieceValue == simonColorSequence[simonIndex]) {

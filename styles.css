@@ -16,23 +16,36 @@ header {
 /* GAME SECTION */
 /* COLOR WHEEL, INDIVIDUAL COLOR PIECES, NEW GAME BUTTON */
 main {
-  width: 60vw;
-  height: 600px;
+  width: 800px;
+  height: 800px;
   border: 1px solid red;
   margin: 0 auto;
 }
 
 #color-wheel {
-  width: 60%;
+  width: 200px;
   margin: 0 auto;
-  height: 500px;
+  height: 200px;
+  position: relative;
+  overflow: hidden;
   border: 1px solid green;
 }
 
+#color-wheel > * {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 50px solid red;
+  border-radius: 50%;
+  clip-path: polygon(50% 50%, 50% 0%, 100% 0%, 100% 33.745%);
+}
+
 .color-piece {
-  width: 70px;
+  /* width: 70px;
   height: 70px;
-  border: 1px solid black;
+  border: 1px solid black; */
 }
 
 .shimmer {
@@ -40,26 +53,32 @@ main {
 }
 
 #purple {
+  transform: rotate(60deg);
   background-color: #5f27cd;
 }
 
 #orange {
+  transform: rotate(120deg);
   background-color: #ff793f;
 }
 
 #red {
+  transform: rotate(180deg);
   background-color: #ff5252;
 }
 
 #blue {
+  transform: rotate(-60deg);
   background-color: #2e86de;
 }
 
 #yellow {
+  transform: rotate(-120deg);
   background-color: #feca57;
 }
 
 #green {
+  transform: rotate(-1800deg);
   background-color: #1dd1a1;
 }
 /* FOOTER SECTION */
