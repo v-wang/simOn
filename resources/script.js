@@ -11,19 +11,19 @@ const newGameButton = document.querySelector("#new-game");
 // NOTE: The following lines are related to Simon and covers basic functionality of the game. Random numbers are being created. Those numbers are being translated to color strings.
 
 // GLOBAL VARIABLES RELATED TO SIMON
-// starting sequence length for Simon
+// starting sequence length for simon sequence
 let seqLength = 2;
 
-// Simon sequence holder
+// simon number sequence holder
 let simonNumSequence = [];
 
-// color sequence holder
+// simon color sequence holder
 let simonColorSequence = [];
 
 // the index used to check player selection against simon sequence
 let simonIndex = 0;
 
-// GENERATION BLOCK
+// NUMBER GENERATION BLOCK
 // part 1 of creating simon sequence
 // Simon sequence random num generator
 function randomNumGen(count) {
@@ -35,7 +35,7 @@ function randomNumGen(count) {
   return simonNumSequence;
 }
 
-// TRANSLATION BLOCK
+// COLOR TRANSLATION BLOCK
 // part 2 of creating simon sequence
 // translating number sequence into color sequence
 // tweak ranges later to change probability - can make range variables that change by level
@@ -73,7 +73,7 @@ function runSequence() {
   return numToColor(randomNums);
 }
 
-// COLOR FLASHING EFFECT
+// COLOR FLASHING EFFECT FOR PIECES
 function animateColor(color) {
   color.classList.add("shimmer");
   setTimeout(() => {
@@ -82,7 +82,7 @@ function animateColor(color) {
 }
 
 // PLAYER SIDE
-// NOTE: Checking each index element of simons sequence and progressing the player, or reset
+// NOTE: Checking each element of simons sequence and progressing the player, or reset
 
 // GLOBAL VARIABLES RELATED TO PLAYER
 // get score num element
@@ -91,7 +91,7 @@ let scoreNumElem = document.querySelector("#score-num");
 // get level elem
 let levelElem = document.querySelector("#level");
 
-// player level - default it set to level 1
+// player level - default set to level 1
 let playerLevel = 1;
 
 // player score - default set to 0
