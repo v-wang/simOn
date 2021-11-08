@@ -98,10 +98,10 @@ let playerLevel = 1;
 let playerScore = 0;
 
 // timer
-let t = 1;
+let t = 0;
 function timer(limit) {
   let timerElem = document.querySelector("#timer");
-  for (let i = limit - 1; i >= 0; i--) {
+  for (let i = limit; i >= 0; i--) {
     setTimeout(() => {
       timerElem.innerText = i;
     }, 1000 * t);
@@ -141,10 +141,10 @@ function seqChecker(piece) {
           let noteElem = document.querySelector(`#${note}`);
           setTimeout(() => {
             t = 1;
-            timer(30);
             noteElem.play();
             animateColor(colorElem);
           }, i * 1000);
+          timer(10);
         });
       }, 1500);
 
@@ -153,6 +153,9 @@ function seqChecker(piece) {
     return simonIndex++;
   } else {
     console.log("you got it wrong, game over");
+
+    // TODO: work on lost modal
+    alert("you lost!");
     newGameButton.classList.toggle("bounce");
     // test code to auto reset after loss
     // seqLength = 2;
@@ -175,14 +178,12 @@ newGameButton.addEventListener("click", (event) => {
   scoreNumElem.innerText = 0;
   levelElem.innerText = "Level 1";
 
+  // sync function - run immediately to get simon sequence
   simonColorSequence = runSequence();
   console.log(simonColorSequence);
 
-  // start timer
-  t = 1;
-  timer(30);
-
-  // animate!
+  // animate
+  // 1.5 sec delay after click for piece to flash
   setTimeout(() => {
     simonColorSequence.forEach((color, i) => {
       let colorElem = document.querySelector(`#${color}`);
@@ -191,10 +192,16 @@ newGameButton.addEventListener("click", (event) => {
       let note = colorElem.getAttribute("data");
       let noteElem = document.querySelector(`#${note}`);
 
+      // setting timeout so that it doesn't play all at once
       setTimeout(() => {
         noteElem.play();
         animateColor(colorElem);
-      }, i * 1000);
+      }, 1000 * i);
+      // start timer
+
+      setTimeout(() => {
+        timer(10);
+      });
     });
   }, 1500);
 });
@@ -210,4 +217,22 @@ colorPieces.forEach((cPiece) => {
 
     seqChecker(cPiece);
   });
+});
+
+// RESEARCH PROMISES
+function reader(arr) {
+  return new Promise((resolve) => {
+    arr.forEach((element, index) => {
+      setTimeout(() => {
+        console.log(element);
+        if (index == arr.length - 1) {
+          resolve();
+        }
+      }, 1000 * index);
+    });
+  });
+}
+
+reader(colors).then(() => {
+  console.log("done");
 });

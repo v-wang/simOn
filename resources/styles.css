@@ -38,12 +38,6 @@ header img:hover {
   z-index: -4;
 }
 
-.head-on {
-}
-
-.head-off {
-}
-
 header > div > h1 {
   text-align: center;
   display: inline;
