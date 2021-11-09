@@ -28,3 +28,9 @@ Development Progress:
 ## Installation
 
 - Remember to include .mp3 files!
+
+## Upcoming Features
+
+- [ ] Resume your game
+- [ ] Multi color wheels
+- [ ] Two tier difficulty
