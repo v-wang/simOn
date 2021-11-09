@@ -13,12 +13,25 @@ const startOverButton = document.querySelectorAll(".start-over");
 // get modal holder
 const modalHolder = document.querySelector("#modal-holder");
 
+// global timer elem
+let timerElemTime = document.querySelector("#timer");
+
 startOverButton.forEach((button) => {
   button.addEventListener("click", () => {
     modalHolder.classList.toggle("hide");
+    if (
+      button.parentElement.parentElement.getAttribute("id") == "welcome-back"
+    ) {
+      welcomeBackModal.classList.toggle("hide");
+    } else if (
+      button.parentElement.parentElement.getAttribute("id") == "game-over"
+    ) {
+      gameOverModal.classList.toggle("hide");
+    }
     localStorage.clear();
     levelElem.innerHTML = "Level :&nbsp 1";
     scoreNumElem.innerText = 0;
+    timerElemTime.innerText = 5;
   });
 });
 
@@ -202,6 +215,7 @@ function seqChecker(piece) {
     return simonIndex++;
   } else {
     clearInterval(timer);
+    localStorage.clear();
     // wrong color choice - player losers
     modalHolder.classList.toggle("hide");
     gameOverModal.classList.toggle("hide");
@@ -217,8 +231,9 @@ newGameButton.addEventListener("click", (event) => {
   event.preventDefault();
 
   // in case user clicks new game button multiple times
-  // stop timer
+  // stop timer & reset
   clearInterval(timer);
+  timerElemTime.innerText = 5;
 
   // remove bounce effect
   newGameButton.classList.toggle("bounce");
