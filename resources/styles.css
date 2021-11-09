@@ -69,6 +69,7 @@ html {
 body {
   font-family: "Nunito", sans-serif;
   color: #2d3436;
+  background-image: url("/resources/img/geometry.png");
   /* background-color: #f1f2f6; */
 }
 
@@ -334,19 +335,19 @@ footer div h4 {
 .modal {
   width: 45vw;
   height: 200px;
-  border: 1px solid red;
   position: relative;
   margin: 0 auto;
   background-color: white;
-  opacity: 1;
+  opacity: 0.9;
   top: 300px;
   border-radius: 45px;
+  border: 6px solid #2d3436;
 }
 
 .modal h1 {
   width: 50%;
   font-size: 20px;
-  font-size: 3vw;
+  font-size: 2vw;
   text-align: center;
   margin: 0 auto;
   margin-top: 25px;
