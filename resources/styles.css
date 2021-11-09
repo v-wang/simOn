@@ -5,6 +5,12 @@
   box-sizing: border-box;
 }
 
+@media screen and (min-width: 600px) {
+  body {
+    background-color: black;
+  }
+}
+
 /* GENERAL */
 body {
   font-family: "Nunito", sans-serif;
@@ -25,18 +31,17 @@ header > * {
   width: 100%;
   margin: 0 auto;
   text-align: center;
+}
+
+#logo-holder {
+  width: 180px;
   border: 1px solid red;
 }
 
-header img:hover {
-  transition: transform 1.5s;
-  transform: scale(2) translateX(70px) translateY(50px);
-}
-
-#logo {
+#logo-holder img {
   width: 50px;
-  display: inline-block;
-  z-index: -4;
+  display: inline;
+  vertical-align: middle;
 }
 
 header > div > h1 {
@@ -165,7 +170,7 @@ main {
   display: block;
   height: 40px;
   width: 140px;
-  margin: 40px auto 0 auto;
+  margin: 68px auto 0 auto;
   border-top: 4px solid black;
   border-left: 4px solid black;
   border-right: 4px solid black;

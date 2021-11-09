@@ -105,7 +105,7 @@ let playerLevel = 1;
 let playerScore = 0;
 
 // timer
-let timeLeft = 5;
+let timeLeft = 10;
 let timer;
 function startTimer(max) {
   let timerElem = document.querySelector("#timer");
@@ -226,11 +226,14 @@ newGameButton.addEventListener("click", (event) => {
 colorPieces.forEach((cPiece) => {
   cPiece.addEventListener("click", (event) => {
     event.preventDefault();
+    if (simonColorSequence.length == 0) {
+      alert("start a new game first!");
+    } else {
+      // play sound
+      let notePiece = cPiece.getAttribute("data");
+      document.getElementById(notePiece).play();
 
-    // play sound
-    let notePiece = cPiece.getAttribute("data");
-    document.getElementById(notePiece).play();
-
-    seqChecker(cPiece);
+      seqChecker(cPiece);
+    }
   });
 });
