@@ -16,9 +16,17 @@ const modalHolder = document.querySelector("#modal-holder");
 startOverButton.forEach((button) => {
   button.addEventListener("click", () => {
     modalHolder.classList.toggle("hide");
-    console.log("done");
+    localStorage.clear();
+    levelElem.innerHTML = "Level :&nbsp 1";
+    scoreNumElem.innerText = 0;
   });
 });
+
+// get welcome back modal
+const welcomeBackModal = document.querySelector("#welcome-back");
+
+// get game over modal
+const gameOverModal = document.querySelector("#game-over");
 
 // SIMON SIDE
 // NOTE: The following lines are related to Simon and covers basic functionality of the game. Random numbers are being created. Those numbers are being translated to color strings.
@@ -161,7 +169,8 @@ function seqChecker(piece) {
       playerScore += 10;
       playerLevel += 1;
       scoreNumElem.innerText = playerScore;
-      levelElem.innerText = `Level ${playerLevel}`;
+      levelElem.innerHTML = `Level :&nbsp ${playerLevel}`;
+      saveToLocal();
 
       // setting next level and increasing difficulty
       seqLength += 1;
@@ -192,11 +201,13 @@ function seqChecker(piece) {
     }
     return simonIndex++;
   } else {
-    console.log("you got it wrong, game over");
-
-    // TODO: work on lost modal
-    alert("you lost!");
+    clearInterval(timer);
+    // wrong color choice - player losers
+    modalHolder.classList.toggle("hide");
+    gameOverModal.classList.toggle("hide");
     newGameButton.classList.toggle("bounce");
+
+    simonColorSequence = [];
     return (simonIndex = 0);
   }
 }
@@ -206,7 +217,7 @@ newGameButton.addEventListener("click", (event) => {
   event.preventDefault();
 
   // in case user clicks new game button multiple times
-  // stops timer before new sequence
+  // stop timer
   clearInterval(timer);
 
   // remove bounce effect
@@ -215,7 +226,7 @@ newGameButton.addEventListener("click", (event) => {
   // reset score and level
   seqLength = 2;
   scoreNumElem.innerText = 0;
-  levelElem.innerText = "Level 1";
+  levelElem.innerHTML = "Level :&nbsp 1";
 
   runSequence()
     .then((arr) => {
@@ -244,8 +255,8 @@ colorPieces.forEach((cPiece) => {
   cPiece.addEventListener("click", (event) => {
     event.preventDefault();
 
-    if (simonColorSequence.length == 0) {
-      //   alert("start a new game first!");
+    if (simonColorSequence.length < 2) {
+      console.log("start a new game first");
     } else {
       // play sound
       let notePiece = cPiece.getAttribute("data");
@@ -255,3 +266,37 @@ colorPieces.forEach((cPiece) => {
     }
   });
 });
+
+// check local storage for recent game
+
+function getCurrentStats() {
+  let currentLevel = levelElem.innerText;
+  let currentScore = scoreNumElem.innerText;
+  return { level: `${currentLevel}`, score: `${currentScore}` };
+}
+
+function saveToLocal() {
+  let currentStats = getCurrentStats();
+  localStorage.setItem("level", `${currentStats.level}`);
+  localStorage.setItem("score", `${currentStats.score}`);
+}
+
+function getLocal() {
+  let lastLevel = localStorage.getItem("level");
+  let lastScore = localStorage.getItem("score");
+  return { level: `${lastLevel}`, score: `${lastScore}` };
+}
+
+function resumeGameChecker() {
+  let localData = getLocal();
+  if (localData.level.includes("null")) {
+    console.log("no record");
+  } else {
+    modalHolder.classList.toggle("hide");
+    welcomeBackModal.classList.toggle("hide");
+    levelElem.innerText = localData.level;
+    scoreNumElem.innerText = localData.score;
+  }
+}
+
+resumeGameChecker();
