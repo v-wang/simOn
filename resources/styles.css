@@ -22,9 +22,10 @@ header {
 }
 
 header > * {
-  width: 180px;
+  width: 100%;
   margin: 0 auto;
   text-align: center;
+  border: 1px solid red;
 }
 
 header img:hover {
@@ -233,10 +234,21 @@ footer {
   background-color: #2d3436;
 }
 
-footer > * {
-  margin: 0 auto;
-}
-
 footer img {
   width: 30px;
+  display: inline-block;
+  margin-right: 10px;
+  margin-bottom: 4px;
+  vertical-align: middle;
+}
+
+footer div {
+  grid-column-start: 3;
+  width: 100%;
+}
+
+footer div h4 {
+  margin-top: 15px;
+  text-align: center;
+  color: white;
 }

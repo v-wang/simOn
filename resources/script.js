@@ -68,11 +68,6 @@ function numToColor(arr) {
 // RUN BLOCK
 // part 3 of creating simon sequence
 // putting it all together (num gen and translation)
-// function runSequence() {
-//   let randomNums = randomNumGen(seqLength);
-//   return numToColor(randomNums);
-// }
-
 function runSequence() {
   return new Promise((resolve) => {
     setTimeout(() => {
@@ -84,10 +79,6 @@ function runSequence() {
     });
   });
 }
-
-// runSequence().then((arr) => {
-//   console.log("done", arr);
-// });
 
 // COLOR FLASHING EFFECT FOR PIECES
 function animateColor(color) {
@@ -138,17 +129,6 @@ function gameOver() {
   newGameButton.classList.toggle("bounce");
 }
 
-// let t = 0;
-// function timer(limit) {
-//   let timerElem = document.querySelector("#timer");
-//   for (let i = limit; i >= 0; i--) {
-//     setTimeout(() => {
-//       timerElem.innerText = i;
-//     }, 1000 * t);
-//     t += 1;
-//   }
-// }
-
 // MAIN BLOCK FOR GAME LOGIC
 // checks if player color selection is correct
 function seqChecker(piece) {
@@ -172,23 +152,7 @@ function seqChecker(piece) {
 
       // setting next level and increasing difficulty
       seqLength += 1;
-      // runSequence()
-      //   .then((arr) => {
-      //     arr.forEach((color, i) => {
-      //       let colorElem = document.querySelector(`#${color}`);
-      //       let note = colorElem.getAttribute("data");
-      //       let noteElem = document.querySelector(`#${note}`);
-      //       setTimeout(() => {
-      //         noteElem.play();
-      //         animateColor(colorElem);
-      //       }, 1000 * i);
-      //     });
-      //   })
-      //   .then(() => {
-      //     setTimeout(() => {
-      //       startTimer(timeLeft);
-      //     }, 800);
-      //   });
+
       runSequence()
         .then((arr) => {
           setTimeout(() => {
@@ -212,26 +176,6 @@ function seqChecker(piece) {
           console.log(simonColorSequence);
           return (simonIndex = 0);
         });
-
-      // simonColorSequence = numToColor(randomNumGen(seqLength));
-      // console.log(simonColorSequence);
-
-      // small pause before colors light up
-      // setTimeout(() => {
-      //   simonColorSequence.forEach((color, i) => {
-      //     let colorElem = document.querySelector(`#${color}`);
-
-      //     // play audio for simon sequence
-      //     let note = colorElem.getAttribute("data");
-      //     let noteElem = document.querySelector(`#${note}`);
-      //     setTimeout(() => {
-      //       noteElem.play();
-      //       animateColor(colorElem);
-      //     }, i * 1000);
-      //   });
-      // }, 1500);
-
-      // return (simonIndex = 0);
     }
     return simonIndex++;
   } else {
@@ -240,11 +184,6 @@ function seqChecker(piece) {
     // TODO: work on lost modal
     alert("you lost!");
     newGameButton.classList.toggle("bounce");
-    // test code to auto reset after loss
-    // seqLength = 2;
-    // simonColorSequence = numToColor(randomNumGen(seqLength));
-    // console.log(simonColorSequence);
-
     return (simonIndex = 0);
   }
 }
@@ -260,10 +199,6 @@ newGameButton.addEventListener("click", (event) => {
   seqLength = 2;
   scoreNumElem.innerText = 0;
   levelElem.innerText = "Level 1";
-
-  // sync function - run immediately to get simon sequence
-  // simonColorSequence = runSequence();
-  // console.log(simonColorSequence);
 
   runSequence()
     .then((arr) => {
@@ -286,27 +221,6 @@ newGameButton.addEventListener("click", (event) => {
       console.log(simonColorSequence);
       return simonColorSequence;
     });
-
-  // // animate
-  // // 1.5 sec delay after click for piece to flash
-  // setTimeout(() => {
-  //   simonColorSequence.forEach((color, i) => {
-  //     let colorElem = document.querySelector(`#${color}`);
-
-  //     // play audio for simon sequence
-  //     let note = colorElem.getAttribute("data");
-  //     let noteElem = document.querySelector(`#${note}`);
-
-  //     // setting timeout so that it doesn't play all at once
-  //     setTimeout(() => {
-  //       noteElem.play();
-  //       animateColor(colorElem);
-  //     }, 1000 * i);
-  //     // start timer
-
-  //     startTimer(timeLeft);
-  //   });
-  // }, 1500);
 });
 
 colorPieces.forEach((cPiece) => {
@@ -320,35 +234,3 @@ colorPieces.forEach((cPiece) => {
     seqChecker(cPiece);
   });
 });
-
-// CHECK PLAYER COLOR CHOICES ON CLICK
-// colorPieces.forEach((cPiece) => {
-//   cPiece.addEventListener("click", (event) => {
-//     event.preventDefault();
-
-//     // play sound
-//     let notePiece = cPiece.getAttribute("data");
-//     document.getElementById(notePiece).play();
-
-//     seqChecker(cPiece);
-//   });
-// });
-
-// RESEARCH PROMISES
-
-// function reader(arr) {
-//   return new Promise((resolve) => {
-//     arr.forEach((element, index) => {
-//       setTimeout(() => {
-//         console.log(element);
-//         if (index == arr.length - 1) {
-//           resolve();
-//         }
-//       }, 1000 * index);
-//     });
-//   });
-// }
-
-// reader(colors).then(() => {
-//   console.log("done");
-// });
