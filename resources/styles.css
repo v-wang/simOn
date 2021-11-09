@@ -1,8 +1,12 @@
 /* CSS RESET */
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+html {
 }
 
 @media (max-width: 767px) {
@@ -312,4 +316,44 @@ footer div h4 {
   margin-top: 15px;
   text-align: center;
   color: white;
+}
+
+/* GAME OVER MODAL */
+
+/* START NEW GAME MODAL */
+#modal-holder {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(45, 52, 52, 0.5);
+}
+
+.modal {
+  width: 45vw;
+  height: 200px;
+  border: 1px solid red;
+  position: relative;
+  margin: 0 auto;
+  background-color: white;
+  opacity: 1;
+  top: 300px;
+  border-radius: 45px;
+}
+
+.modal h1 {
+  width: 50%;
+  font-size: 20px;
+  font-size: 3vw;
+  text-align: center;
+  margin: 0 auto;
+  margin-top: 25px;
+  color: black;
+  /* border: 1px solid red; */
+}
+
+.hide {
+  display: none;
 }

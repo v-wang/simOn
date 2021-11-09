@@ -34,3 +34,7 @@ Development Progress:
 - [ ] Resume your game
 - [ ] Multi color wheels
 - [ ] Two tier difficulty
+
+## Suggestions?
+
+<midnightcoffeecode@gmail.com>
