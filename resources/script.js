@@ -68,10 +68,26 @@ function numToColor(arr) {
 // RUN BLOCK
 // part 3 of creating simon sequence
 // putting it all together (num gen and translation)
+// function runSequence() {
+//   let randomNums = randomNumGen(seqLength);
+//   return numToColor(randomNums);
+// }
+
 function runSequence() {
-  let randomNums = randomNumGen(seqLength);
-  return numToColor(randomNums);
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      if (true) {
+        let randomNums = randomNumGen(seqLength);
+        let colorArray = numToColor(randomNums);
+        resolve(colorArray);
+      }
+    });
+  });
 }
+
+// runSequence().then((arr) => {
+//   console.log("done", arr);
+// });
 
 // COLOR FLASHING EFFECT FOR PIECES
 function animateColor(color) {
@@ -98,16 +114,39 @@ let playerLevel = 1;
 let playerScore = 0;
 
 // timer
-let t = 0;
-function timer(limit) {
+let timeLeft = 5;
+let timer;
+function startTimer(max) {
   let timerElem = document.querySelector("#timer");
-  for (let i = limit; i >= 0; i--) {
-    setTimeout(() => {
-      timerElem.innerText = i;
-    }, 1000 * t);
-    t += 1;
-  }
+  timer = setInterval(() => {
+    if (max <= 0) {
+      gameOver();
+    }
+    timerElem.innerText = max;
+    max -= 1;
+  }, 1000);
 }
+
+function resetTimer() {
+  clearInterval(timer);
+}
+
+function gameOver() {
+  resetTimer();
+  alert("game over");
+  newGameButton.classList.toggle("bounce");
+}
+
+// let t = 0;
+// function timer(limit) {
+//   let timerElem = document.querySelector("#timer");
+//   for (let i = limit; i >= 0; i--) {
+//     setTimeout(() => {
+//       timerElem.innerText = i;
+//     }, 1000 * t);
+//     t += 1;
+//   }
+// }
 
 // MAIN BLOCK FOR GAME LOGIC
 // checks if player color selection is correct
@@ -117,7 +156,12 @@ function seqChecker(piece) {
 
   // checking player color selection against simon
   if (cPieceValue == simonColorSequence[simonIndex]) {
+    resetTimer();
+
+    // if it's the last color to check, move on to next round
     if (simonIndex == simonColorSequence.length - 1) {
+      resetTimer();
+      startTimer(timeLeft);
       console.log("nice, you won this round! get ready for the next one!");
 
       // update player score after win
@@ -128,6 +172,24 @@ function seqChecker(piece) {
 
       // setting next level and increasing difficulty
       seqLength += 1;
+      // runSequence()
+      //   .then((arr) => {
+      //     arr.forEach((color, i) => {
+      //       let colorElem = document.querySelector(`#${color}`);
+      //       let note = colorElem.getAttribute("data");
+      //       let noteElem = document.querySelector(`#${note}`);
+      //       setTimeout(() => {
+      //         noteElem.play();
+      //         animateColor(colorElem);
+      //       }, 1000 * i);
+      //     });
+      //   })
+      //   .then(() => {
+      //     setTimeout(() => {
+      //       startTimer(timeLeft);
+      //     }, 800);
+      //   });
+
       simonColorSequence = numToColor(randomNumGen(seqLength));
       console.log(simonColorSequence);
 
@@ -140,11 +202,9 @@ function seqChecker(piece) {
           let note = colorElem.getAttribute("data");
           let noteElem = document.querySelector(`#${note}`);
           setTimeout(() => {
-            t = 1;
             noteElem.play();
             animateColor(colorElem);
           }, i * 1000);
-          timer(10);
         });
       }, 1500);
 
@@ -179,60 +239,93 @@ newGameButton.addEventListener("click", (event) => {
   levelElem.innerText = "Level 1";
 
   // sync function - run immediately to get simon sequence
-  simonColorSequence = runSequence();
-  console.log(simonColorSequence);
+  // simonColorSequence = runSequence();
+  // console.log(simonColorSequence);
 
-  // animate
-  // 1.5 sec delay after click for piece to flash
-  setTimeout(() => {
-    simonColorSequence.forEach((color, i) => {
-      let colorElem = document.querySelector(`#${color}`);
-
-      // play audio for simon sequence
-      let note = colorElem.getAttribute("data");
-      let noteElem = document.querySelector(`#${note}`);
-
-      // setting timeout so that it doesn't play all at once
+  runSequence()
+    .then((arr) => {
+      arr.forEach((color, i) => {
+        let colorElem = document.querySelector(`#${color}`);
+        let note = colorElem.getAttribute("data");
+        let noteElem = document.querySelector(`#${note}`);
+        setTimeout(() => {
+          noteElem.play();
+          animateColor(colorElem);
+        }, 1000 * i);
+      });
+      return arr;
+    })
+    .then((arr) => {
       setTimeout(() => {
-        noteElem.play();
-        animateColor(colorElem);
-      }, 1000 * i);
-      // start timer
+        startTimer(timeLeft);
+      }, 800);
+      return arr;
+    })
+    .then((arr) => {
+      simonColorSequence = arr;
+      console.log(simonColorSequence);
+      colorPieces.forEach((cPiece) => {
+        cPiece.addEventListener("click", (event) => {
+          event.preventDefault();
 
-      setTimeout(() => {
-        timer(10);
+          // play sound
+          let notePiece = cPiece.getAttribute("data");
+          document.getElementById(notePiece).play();
+
+          seqChecker(cPiece);
+        });
       });
     });
-  }, 1500);
+  // // animate
+  // // 1.5 sec delay after click for piece to flash
+  // setTimeout(() => {
+  //   simonColorSequence.forEach((color, i) => {
+  //     let colorElem = document.querySelector(`#${color}`);
+
+  //     // play audio for simon sequence
+  //     let note = colorElem.getAttribute("data");
+  //     let noteElem = document.querySelector(`#${note}`);
+
+  //     // setting timeout so that it doesn't play all at once
+  //     setTimeout(() => {
+  //       noteElem.play();
+  //       animateColor(colorElem);
+  //     }, 1000 * i);
+  //     // start timer
+
+  //     startTimer(timeLeft);
+  //   });
+  // }, 1500);
 });
 
 // CHECK PLAYER COLOR CHOICES ON CLICK
-colorPieces.forEach((cPiece) => {
-  cPiece.addEventListener("click", (event) => {
-    event.preventDefault();
+// colorPieces.forEach((cPiece) => {
+//   cPiece.addEventListener("click", (event) => {
+//     event.preventDefault();
 
-    // play sound
-    let notePiece = cPiece.getAttribute("data");
-    document.getElementById(notePiece).play();
+//     // play sound
+//     let notePiece = cPiece.getAttribute("data");
+//     document.getElementById(notePiece).play();
 
-    seqChecker(cPiece);
-  });
-});
+//     seqChecker(cPiece);
+//   });
+// });
 
 // RESEARCH PROMISES
-function reader(arr) {
-  return new Promise((resolve) => {
-    arr.forEach((element, index) => {
-      setTimeout(() => {
-        console.log(element);
-        if (index == arr.length - 1) {
-          resolve();
-        }
-      }, 1000 * index);
-    });
-  });
-}
 
-reader(colors).then(() => {
-  console.log("done");
-});
+// function reader(arr) {
+//   return new Promise((resolve) => {
+//     arr.forEach((element, index) => {
+//       setTimeout(() => {
+//         console.log(element);
+//         if (index == arr.length - 1) {
+//           resolve();
+//         }
+//       }, 1000 * index);
+//     });
+//   });
+// }
+
+// reader(colors).then(() => {
+//   console.log("done");
+// });
