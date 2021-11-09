@@ -129,7 +129,7 @@ function startTimer(max) {
 
 function resetTimer() {
   clearInterval(timer);
-  startTimer(timeLeft);
+  return startTimer(timeLeft);
 }
 
 function gameOver() {
@@ -162,6 +162,7 @@ function seqChecker(piece) {
     // if it's the last color to check, move on to next round
     if (simonIndex == simonColorSequence.length - 1) {
       console.log("nice, you won this round! get ready for the next one!");
+      clearInterval(timer);
 
       // update player score after win
       playerScore += 10;
@@ -188,26 +189,49 @@ function seqChecker(piece) {
       //       startTimer(timeLeft);
       //     }, 800);
       //   });
+      runSequence()
+        .then((arr) => {
+          setTimeout(() => {
+            arr.forEach((color, i) => {
+              let colorElem = document.querySelector(`#${color}`);
+              let note = colorElem.getAttribute("data");
+              let noteElem = document.querySelector(`#${note}`);
+              setTimeout(() => {
+                noteElem.play();
+                animateColor(colorElem);
+                if (i == arr.length - 1) {
+                  startTimer(timeLeft);
+                }
+              }, 1000 * i);
+            });
+          }, 1000);
+          return arr;
+        })
+        .then((arr) => {
+          simonColorSequence = arr;
+          console.log(simonColorSequence);
+          return (simonIndex = 0);
+        });
 
-      simonColorSequence = numToColor(randomNumGen(seqLength));
-      console.log(simonColorSequence);
+      // simonColorSequence = numToColor(randomNumGen(seqLength));
+      // console.log(simonColorSequence);
 
       // small pause before colors light up
-      setTimeout(() => {
-        simonColorSequence.forEach((color, i) => {
-          let colorElem = document.querySelector(`#${color}`);
+      // setTimeout(() => {
+      //   simonColorSequence.forEach((color, i) => {
+      //     let colorElem = document.querySelector(`#${color}`);
 
-          // play audio for simon sequence
-          let note = colorElem.getAttribute("data");
-          let noteElem = document.querySelector(`#${note}`);
-          setTimeout(() => {
-            noteElem.play();
-            animateColor(colorElem);
-          }, i * 1000);
-        });
-      }, 1500);
+      //     // play audio for simon sequence
+      //     let note = colorElem.getAttribute("data");
+      //     let noteElem = document.querySelector(`#${note}`);
+      //     setTimeout(() => {
+      //       noteElem.play();
+      //       animateColor(colorElem);
+      //     }, i * 1000);
+      //   });
+      // }, 1500);
 
-      return (simonIndex = 0);
+      // return (simonIndex = 0);
     }
     return simonIndex++;
   } else {
@@ -260,17 +284,7 @@ newGameButton.addEventListener("click", (event) => {
       }, 800);
       simonColorSequence = arr;
       console.log(simonColorSequence);
-      colorPieces.forEach((cPiece) => {
-        cPiece.addEventListener("click", (event) => {
-          event.preventDefault();
-
-          // play sound
-          let notePiece = cPiece.getAttribute("data");
-          document.getElementById(notePiece).play();
-
-          seqChecker(cPiece);
-        });
-      });
+      return simonColorSequence;
     });
 
   // // animate
@@ -293,6 +307,18 @@ newGameButton.addEventListener("click", (event) => {
   //     startTimer(timeLeft);
   //   });
   // }, 1500);
+});
+
+colorPieces.forEach((cPiece) => {
+  cPiece.addEventListener("click", (event) => {
+    event.preventDefault();
+
+    // play sound
+    let notePiece = cPiece.getAttribute("data");
+    document.getElementById(notePiece).play();
+
+    seqChecker(cPiece);
+  });
 });
 
 // CHECK PLAYER COLOR CHOICES ON CLICK
