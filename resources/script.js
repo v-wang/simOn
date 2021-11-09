@@ -146,6 +146,7 @@ function startTimer(max) {
   timer = setInterval(() => {
     if (max <= 0) {
       gameOver();
+      clearInterval(timer);
     }
     timerElem.innerText = max;
     max -= 1;
@@ -158,8 +159,8 @@ function resetTimer() {
 }
 
 function gameOver() {
-  resetTimer();
-  alert("game over");
+  modalHolder.classList.toggle("hide");
+  gameOverModal.classList.toggle("hide");
   newGameButton.classList.toggle("bounce");
 }
 
@@ -287,19 +288,21 @@ colorPieces.forEach((cPiece) => {
 function getCurrentStats() {
   let currentLevel = levelElem.innerText;
   let currentScore = scoreNumElem.innerText;
-  return { level: `${currentLevel}`, score: `${currentScore}` };
+  return { level: `${currentLevel}`, score: `${currentScore}`, seq: seqLength };
 }
 
 function saveToLocal() {
   let currentStats = getCurrentStats();
   localStorage.setItem("level", `${currentStats.level}`);
   localStorage.setItem("score", `${currentStats.score}`);
+  localStorage.setItem("seq", `${currentStats.seq}`);
 }
 
 function getLocal() {
   let lastLevel = localStorage.getItem("level");
   let lastScore = localStorage.getItem("score");
-  return { level: `${lastLevel}`, score: `${lastScore}` };
+  let lastSeq = localStorage.getItem("seq");
+  return { level: `${lastLevel}`, score: `${lastScore}`, seq: `${lastSeq}` };
 }
 
 function resumeGameChecker() {
@@ -315,3 +318,47 @@ function resumeGameChecker() {
 }
 
 resumeGameChecker();
+
+// CONTINUING THE GAME
+const contGameButton = document.querySelector("#continue-game");
+
+contGameButton.addEventListener("click", (event) => {
+  event.preventDefault();
+  modalHolder.classList.toggle("hide");
+  welcomeBackModal.classList.toggle("hide");
+
+  // stop timer & reset
+  clearInterval(timer);
+  timerElemTime.innerText = 5;
+
+  // remove bounce effect
+  newGameButton.classList.toggle("bounce");
+
+  // set last stats
+  let resumeStats = getLocal();
+  seqLength = resumeStats.seq;
+  scoreNumElem.innerText = resumeStats.score;
+  levelElem.innerHTML = resumeStats.level;
+
+  runSequence()
+    .then((arr) => {
+      arr.forEach((color, i) => {
+        let colorElem = document.querySelector(`#${color}`);
+        let note = colorElem.getAttribute("data");
+        let noteElem = document.querySelector(`#${note}`);
+        setTimeout(() => {
+          noteElem.play();
+          animateColor(colorElem);
+        }, 1000 * i);
+      });
+      return arr;
+    })
+    .then((arr) => {
+      setTimeout(() => {
+        startTimer(timeLeft);
+      }, 800);
+      simonColorSequence = arr;
+      console.log(simonColorSequence);
+      return simonColorSequence;
+    });
+});
