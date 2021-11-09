@@ -129,6 +129,7 @@ function startTimer(max) {
 
 function resetTimer() {
   clearInterval(timer);
+  startTimer(timeLeft);
 }
 
 function gameOver() {
@@ -160,8 +161,6 @@ function seqChecker(piece) {
 
     // if it's the last color to check, move on to next round
     if (simonIndex == simonColorSequence.length - 1) {
-      resetTimer();
-      startTimer(timeLeft);
       console.log("nice, you won this round! get ready for the next one!");
 
       // update player score after win
@@ -259,9 +258,6 @@ newGameButton.addEventListener("click", (event) => {
       setTimeout(() => {
         startTimer(timeLeft);
       }, 800);
-      return arr;
-    })
-    .then((arr) => {
       simonColorSequence = arr;
       console.log(simonColorSequence);
       colorPieces.forEach((cPiece) => {
@@ -276,6 +272,7 @@ newGameButton.addEventListener("click", (event) => {
         });
       });
     });
+
   // // animate
   // // 1.5 sec delay after click for piece to flash
   // setTimeout(() => {
