@@ -14,15 +14,21 @@
     <title>SIMON</title>
   </head>
   <body>
-    <div id="modal-holder">
-      <div class="modal" id="start-new-game">
+    <div id="modal-holder" class="">
+      <div class="modal" id="welcome-back">
         <h1>Welcome back! Ready to pick up where you left off?</h1>
-        <button>Yes</button>
-        <button>Start Over</button>
+        <div>
+          <button>YES</button>
+          <button class="start-over">START OVER</button>
+        </div>
+      </div>
+      <div class="modal hide" id="game-over">
+        <h1>Oh no, wrong color! Try again!</h1>
+        <div>
+          <button class="start-over">START OVER</button>
+        </div>
       </div>
     </div>
-
-    <!-- <div class="modal hide" id="game-over"></div> -->
     <header>
       <div id="logo-holder">
         <img src="./resources/img/simon-figure.jpg" alt="" />

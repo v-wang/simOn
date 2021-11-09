@@ -7,6 +7,19 @@ const colorPieces = document.querySelectorAll(".color-piece");
 // get new game button
 const newGameButton = document.querySelector("#new-game");
 
+// get start over button
+const startOverButton = document.querySelectorAll(".start-over");
+
+// get modal holder
+const modalHolder = document.querySelector("#modal-holder");
+
+startOverButton.forEach((button) => {
+  button.addEventListener("click", () => {
+    modalHolder.classList.toggle("hide");
+    console.log("done");
+  });
+});
+
 // SIMON SIDE
 // NOTE: The following lines are related to Simon and covers basic functionality of the game. Random numbers are being created. Those numbers are being translated to color strings.
 
@@ -192,6 +205,10 @@ function seqChecker(piece) {
 newGameButton.addEventListener("click", (event) => {
   event.preventDefault();
 
+  // in case user clicks new game button multiple times
+  // stops timer before new sequence
+  clearInterval(timer);
+
   // remove bounce effect
   newGameButton.classList.toggle("bounce");
 
@@ -226,8 +243,9 @@ newGameButton.addEventListener("click", (event) => {
 colorPieces.forEach((cPiece) => {
   cPiece.addEventListener("click", (event) => {
     event.preventDefault();
+
     if (simonColorSequence.length == 0) {
-      alert("start a new game first!");
+      //   alert("start a new game first!");
     } else {
       // play sound
       let notePiece = cPiece.getAttribute("data");
