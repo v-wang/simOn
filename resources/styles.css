@@ -5,9 +5,34 @@
   box-sizing: border-box;
 }
 
-@media screen and (min-width: 600px) {
-  body {
-    background-color: black;
+@media (max-width: 767px) {
+  header {
+    display: flex !important;
+    flex-direction: column !important;
+    border: 1px solid red;
+  }
+
+  main {
+    border: 1px solid green;
+    width: 100vw !important;
+    height: 495px !important;
+  }
+
+  #color-wheel {
+    width: 260px !important;
+    height: 260px !important;
+  }
+
+  footer div {
+    margin-top: 5px;
+  }
+
+  footer div img {
+    width: 20px;
+  }
+
+  footer div h4 {
+    font-size: 12px;
   }
 }
 
@@ -248,7 +273,7 @@ footer img {
 }
 
 footer div {
-  grid-column-start: 3;
+  grid-column-start: 2;
   width: 100%;
 }
 
