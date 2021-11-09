@@ -336,7 +336,9 @@ contGameButton.addEventListener("click", (event) => {
 
   // set last stats
   let resumeStats = getLocal();
-  seqLength = resumeStats.seq;
+  seqLength = parseInt(resumeStats.seq);
+  seqLength += 1;
+  console.log(seqLength);
   scoreNumElem.innerText = resumeStats.score;
   levelElem.innerHTML = resumeStats.level;
 
