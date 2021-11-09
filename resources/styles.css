@@ -9,11 +9,31 @@
   header {
     display: flex !important;
     flex-direction: column !important;
-    border: 1px solid red;
+  }
+
+  header > * > h1 {
+    font-size: 18px;
+  }
+
+  #logo-holder {
+    margin-top: 25px;
+    margin-bottom: 22px;
+  }
+
+  #logo-holder h1 {
+    display: block;
+    font-size: 24px;
+  }
+
+  #logo-holder img {
+    width: 50px;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    /* border: 1px solid green; */
   }
 
   main {
-    border: 1px solid green;
     width: 100vw !important;
     height: 495px !important;
   }
@@ -21,6 +41,11 @@
   #color-wheel {
     width: 260px !important;
     height: 260px !important;
+  }
+
+  #timer {
+    left: 44% !important;
+    top: 31% !important;
   }
 
   footer div {
@@ -60,13 +85,19 @@ header > * {
 
 #logo-holder {
   width: 180px;
-  border: 1px solid red;
+  /* border: 1px solid red; */
 }
 
 #logo-holder img {
   width: 50px;
-  display: inline;
+  /* border: 1px solid green; */
   vertical-align: middle;
+}
+
+#logo-holder h1 {
+  /* border: 1px solid black; */
+  vertical-align: middle;
+  /* margin-bottom: 5px; */
 }
 
 header > div > h1 {

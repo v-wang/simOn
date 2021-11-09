@@ -105,7 +105,7 @@ let playerLevel = 1;
 let playerScore = 0;
 
 // timer
-let timeLeft = 10;
+let timeLeft = 5;
 let timer;
 function startTimer(max) {
   let timerElem = document.querySelector("#timer");
