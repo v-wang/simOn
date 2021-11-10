@@ -114,6 +114,10 @@ header > div > h1 {
   margin-left: 5px;
 }
 
+.prevent-click {
+  pointer-events: none;
+}
+
 /* GAME SECTION */
 /* COLOR WHEEL, INDIVIDUAL COLOR PIECES, NEW GAME BUTTON */
 main {

@@ -29,7 +29,7 @@ startOverButton.forEach((button) => {
       gameOverModal.classList.toggle("hide");
     }
     localStorage.clear();
-    levelElem.innerHTML = "Level :&nbsp 1";
+    levelElem.innerText = playerLevel;
     scoreNumElem.innerText = 0;
     timerElemTime.innerText = 5;
   });
@@ -182,36 +182,40 @@ function seqChecker(piece) {
       // update player score after win
       playerScore += 10;
       playerLevel += 1;
+      console.log(playerLevel);
       scoreNumElem.innerText = playerScore;
-      levelElem.innerHTML = `Level :&nbsp ${playerLevel}`;
-      saveToLocal();
+      levelElem.innerText = playerLevel;
 
       // setting next level and increasing difficulty
       seqLength += 1;
-
-      runSequence()
-        .then((arr) => {
-          setTimeout(() => {
-            arr.forEach((color, i) => {
-              let colorElem = document.querySelector(`#${color}`);
-              let note = colorElem.getAttribute("data");
-              let noteElem = document.querySelector(`#${note}`);
-              setTimeout(() => {
-                noteElem.play();
-                animateColor(colorElem);
-                if (i == arr.length - 1) {
-                  startTimer(timeLeft);
-                }
-              }, 1000 * i);
+      saveToLocal();
+      setTimeout(() => {
+        runSequence()
+          .then((arr) => {
+            return new Promise((resolve) => {
+              arr.forEach((color, i) => {
+                let colorElem = document.querySelector(`#${color}`);
+                let note = colorElem.getAttribute("data");
+                let noteElem = document.querySelector(`#${note}`);
+                setTimeout(() => {
+                  noteElem.play();
+                  animateColor(colorElem);
+                  if (i == arr.length - 1) {
+                    resolve(arr);
+                  }
+                }, 1000 * i);
+              });
             });
-          }, 1000);
-          return arr;
-        })
-        .then((arr) => {
-          simonColorSequence = arr;
-          console.log(simonColorSequence);
-          return (simonIndex = 0);
-        });
+          })
+          .then((arr) => {
+            // setTimeout(() => {
+            startTimer(timeLeft);
+            // }, 800);
+            simonColorSequence = arr;
+            console.log(simonColorSequence);
+            return (simonIndex = 0);
+          });
+      }, 2000);
     }
     return simonIndex++;
   } else {
@@ -242,25 +246,29 @@ newGameButton.addEventListener("click", (event) => {
   // reset score and level
   seqLength = 2;
   scoreNumElem.innerText = 0;
-  levelElem.innerHTML = "Level :&nbsp 1";
+  levelElem.innerText = playerLevel;
 
   runSequence()
     .then((arr) => {
-      arr.forEach((color, i) => {
-        let colorElem = document.querySelector(`#${color}`);
-        let note = colorElem.getAttribute("data");
-        let noteElem = document.querySelector(`#${note}`);
-        setTimeout(() => {
-          noteElem.play();
-          animateColor(colorElem);
-        }, 1000 * i);
+      return new Promise((resolve) => {
+        arr.forEach((color, i) => {
+          let colorElem = document.querySelector(`#${color}`);
+          let note = colorElem.getAttribute("data");
+          let noteElem = document.querySelector(`#${note}`);
+          setTimeout(() => {
+            noteElem.play();
+            animateColor(colorElem);
+            if (i == arr.length - 1) {
+              resolve(arr);
+            }
+          }, 1000 * i);
+        });
       });
-      return arr;
     })
     .then((arr) => {
-      setTimeout(() => {
-        startTimer(timeLeft);
-      }, 800);
+      // setTimeout(() => {
+      startTimer(timeLeft);
+      // }, 200);
       simonColorSequence = arr;
       console.log(simonColorSequence);
       return simonColorSequence;
@@ -328,7 +336,7 @@ contGameButton.addEventListener("click", (event) => {
   welcomeBackModal.classList.toggle("hide");
 
   // stop timer & reset
-  clearInterval(timer);
+  // clearInterval(timer);
   timerElemTime.innerText = 5;
 
   // remove bounce effect
@@ -337,23 +345,27 @@ contGameButton.addEventListener("click", (event) => {
   // set last stats
   let resumeStats = getLocal();
   seqLength = parseInt(resumeStats.seq);
-  seqLength += 1;
-  console.log(seqLength);
+  playerLevel = parseInt(resumeStats.level);
+  playerScore = parseInt(resumeStats.score);
   scoreNumElem.innerText = resumeStats.score;
-  levelElem.innerHTML = resumeStats.level;
+  levelElem.innerText = resumeStats.level;
 
   runSequence()
     .then((arr) => {
-      arr.forEach((color, i) => {
-        let colorElem = document.querySelector(`#${color}`);
-        let note = colorElem.getAttribute("data");
-        let noteElem = document.querySelector(`#${note}`);
-        setTimeout(() => {
-          noteElem.play();
-          animateColor(colorElem);
-        }, 1000 * i);
+      return new Promise((resolve) => {
+        arr.forEach((color, i) => {
+          let colorElem = document.querySelector(`#${color}`);
+          let note = colorElem.getAttribute("data");
+          let noteElem = document.querySelector(`#${note}`);
+          setTimeout(() => {
+            noteElem.play();
+            animateColor(colorElem);
+            if (i == arr.length - 1) {
+              resolve(arr);
+            }
+          }, 1000 * i);
+        });
       });
-      return arr;
     })
     .then((arr) => {
       setTimeout(() => {
