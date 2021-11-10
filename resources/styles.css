@@ -451,12 +451,13 @@ footer div h4 {
 /* TODO: FIX HEIGHT OF ELEMS FOR VARIOUS MOBILE SCREEN SIZES */
 /* MOBILE RESPONSIVE */
 @media screen and (max-width: 767px) {
-  html {
+  /* html {
     height: 100%;
-  }
+  } */
 
   body {
-    height: 100%;
+    height: 100vh;
+    overflow-y: hidden;
   }
 
   header {
