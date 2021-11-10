@@ -318,14 +318,15 @@ colorPieces.forEach((cPiece) => {
   });
 });
 
-// check local storage for recent game
-
+// SAVING GAME DATA LOCALLY
+// getting current status of the game
 function getCurrentStats() {
   let currentLevel = levelElem.innerText;
   let currentScore = scoreNumElem.innerText;
   return { level: `${currentLevel}`, score: `${currentScore}`, seq: seqLength };
 }
 
+// save locally
 function saveToLocal() {
   let currentStats = getCurrentStats();
   localStorage.setItem("level", `${currentStats.level}`);
@@ -333,6 +334,7 @@ function saveToLocal() {
   localStorage.setItem("seq", `${currentStats.seq}`);
 }
 
+// get local info after saving
 function getLocal() {
   let lastLevel = localStorage.getItem("level");
   let lastScore = localStorage.getItem("score");
@@ -340,6 +342,8 @@ function getLocal() {
   return { level: `${lastLevel}`, score: `${lastScore}`, seq: `${lastSeq}` };
 }
 
+// conditional to see if data exists to resume game
+// if not, start new game
 function resumeGameChecker() {
   let localData = getLocal();
   if (localData.level.includes("null")) {
@@ -351,9 +355,9 @@ function resumeGameChecker() {
     scoreNumElem.innerText = localData.score;
   }
 }
-
 resumeGameChecker();
 
+// TODO: refactor this and add to 'new button'
 // CONTINUING THE GAME
 const contGameButton = document.querySelector("#continue-game");
 

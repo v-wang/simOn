@@ -192,6 +192,7 @@ main {
 
 .color-piece:hover {
   cursor: help;
+  box-shadow: inset 2px 5px 2px black;
 }
 
 .shimmer {
@@ -327,9 +328,13 @@ main {
   transform: translateY(2px);
   box-shadow: none;
 }
+@font-face {
+  font-family: "Digital Clock";
+  src: url("./img/digital-7.regular.ttf");
+}
 
 #timer {
-  font-family: "Patrick Hand", cursive;
+  font-family: "Digital Clock";
   position: relative;
   left: 46.5%;
   top: 35%;
@@ -453,10 +458,6 @@ footer div h4 {
     grid-template-rows: 33% 33% 33%;
   }
 
-  header > * {
-    /* border: 1px solid green; */
-  }
-
   header > div > h1 {
     font-size: 24px;
   }
@@ -493,25 +494,24 @@ footer div h4 {
   }
 
   main {
-    width: 400px;
-    height: 495px;
-    /* border: 1px solid green; */
+    width: 300px;
+    height: 360px;
+    margin-top: -30px;
   }
 
   #color-wheel {
     width: 260px;
     height: 260px;
+    margin-top: -90px;
+    margin-bottom: -20px;
   }
 
   #timer {
     position: relative;
-    left: 174px;
-    top: 188px;
-
+    left: 125px;
+    top: 122px;
     overflow: visible;
     margin-bottom: 60px;
-
-    /* border: 1px solid red; */
   }
 
   footer div {
