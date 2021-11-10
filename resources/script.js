@@ -182,15 +182,28 @@ function seqChecker(piece) {
       // update player score after win
       playerScore += 10;
       playerLevel += 1;
-      console.log(playerLevel);
       scoreNumElem.innerText = playerScore;
       levelElem.innerText = playerLevel;
 
       // setting next level and increasing difficulty
-      seqLength += 1;
+      if (playerLevel % 3 == 0) {
+        seqLength += 1;
+      }
+
       saveToLocal();
+
       setTimeout(() => {
         runSequence()
+          .then((arr) => {
+            return new Promise((resolve) => {
+              colorPieces.forEach((color, i) => {
+                disableClick(color);
+                if (i == colorPieces.length - 1) {
+                  resolve(arr);
+                }
+              });
+            });
+          })
           .then((arr) => {
             return new Promise((resolve) => {
               arr.forEach((color, i) => {
@@ -201,6 +214,8 @@ function seqChecker(piece) {
                   noteElem.play();
                   animateColor(colorElem);
                   if (i == arr.length - 1) {
+                    colorPieces.forEach((color) => enableClick(color));
+
                     resolve(arr);
                   }
                 }, 1000 * i);
@@ -231,10 +246,21 @@ function seqChecker(piece) {
   }
 }
 
+// prevent click event while simon goes
+function disableClick(color) {
+  color.classList.toggle("prevent-click");
+}
+
+// readd click event
+function enableClick(button) {
+  button.classList.toggle("prevent-click");
+}
+
 // START NEW GAME ON CLICK
 newGameButton.addEventListener("click", (event) => {
   event.preventDefault();
-
+  colorPieces.forEach((color) => disableClick(color));
+  disableClick(newGameButton);
   // in case user clicks new game button multiple times
   // stop timer & reset
   clearInterval(timer);
@@ -259,6 +285,8 @@ newGameButton.addEventListener("click", (event) => {
             noteElem.play();
             animateColor(colorElem);
             if (i == arr.length - 1) {
+              enableClick(newGameButton);
+              colorPieces.forEach((color) => enableClick(color));
               resolve(arr);
             }
           }, 1000 * i);
@@ -266,9 +294,8 @@ newGameButton.addEventListener("click", (event) => {
       });
     })
     .then((arr) => {
-      // setTimeout(() => {
       startTimer(timeLeft);
-      // }, 200);
+
       simonColorSequence = arr;
       console.log(simonColorSequence);
       return simonColorSequence;
@@ -350,29 +377,31 @@ contGameButton.addEventListener("click", (event) => {
   scoreNumElem.innerText = resumeStats.score;
   levelElem.innerText = resumeStats.level;
 
-  runSequence()
-    .then((arr) => {
-      return new Promise((resolve) => {
-        arr.forEach((color, i) => {
-          let colorElem = document.querySelector(`#${color}`);
-          let note = colorElem.getAttribute("data");
-          let noteElem = document.querySelector(`#${note}`);
-          setTimeout(() => {
-            noteElem.play();
-            animateColor(colorElem);
-            if (i == arr.length - 1) {
-              resolve(arr);
-            }
-          }, 1000 * i);
+  setTimeout(() => {
+    runSequence()
+      .then((arr) => {
+        return new Promise((resolve) => {
+          arr.forEach((color, i) => {
+            let colorElem = document.querySelector(`#${color}`);
+            let note = colorElem.getAttribute("data");
+            let noteElem = document.querySelector(`#${note}`);
+            setTimeout(() => {
+              noteElem.play();
+              animateColor(colorElem);
+              if (i == arr.length - 1) {
+                resolve(arr);
+              }
+            }, 1000 * i);
+          });
         });
+      })
+      .then((arr) => {
+        setTimeout(() => {
+          startTimer(timeLeft);
+        }, 800);
+        simonColorSequence = arr;
+        console.log(simonColorSequence);
+        return simonColorSequence;
       });
-    })
-    .then((arr) => {
-      setTimeout(() => {
-        startTimer(timeLeft);
-      }, 800);
-      simonColorSequence = arr;
-      console.log(simonColorSequence);
-      return simonColorSequence;
-    });
+  }, 2000);
 });

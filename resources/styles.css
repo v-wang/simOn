@@ -73,6 +73,10 @@ body {
   /* background-color: #f1f2f6; */
 }
 
+.prevent-click {
+  pointer-events: none;
+}
+
 /* TOP SECTION */
 /* GAME TITLE, LEVEL NUM, SCORE */
 header {
@@ -112,10 +116,6 @@ header > div > h1 {
 
 #score-num {
   margin-left: 5px;
-}
-
-.prevent-click {
-  pointer-events: none;
 }
 
 /* GAME SECTION */
