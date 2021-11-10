@@ -377,9 +377,7 @@ footer a {
   text-decoration: none;
 }
 
-/* GAME OVER MODAL */
-
-/* START NEW GAME MODAL */
+/* GAME MODALS */
 #modal-holder {
   position: absolute;
   top: 0;
@@ -456,13 +454,13 @@ footer a {
 /* MOBILE RESPONSIVE */
 @media screen and (max-width: 767px) {
   html {
-    height: 100vh;
-    overflow-y: hidden;
+    height: 100%;
   }
 
   body {
     /* 80? */
-    height: 100%;
+    /* height: 100%; */
+    overflow-y: hidden;
   }
 
   header {
@@ -539,6 +537,34 @@ footer a {
 
   footer div h4 {
     font-size: 12px;
+  }
+
+  .modal {
+    top: 30%;
+    width: 280px;
+    height: 150px;
+    border: none;
+    border-radius: 20px;
+  }
+
+  .modal h1 {
+    display: inline-block;
+    width: 100%;
+    font-size: 20px;
+    /* border: 1px solid red; */
+    margin-top: 28px;
+  }
+
+  #continue-game {
+    margin-left: 0px;
+  }
+
+  #start-over {
+    margin-right: 0px;
+  }
+
+  .modal button:active {
+    background: #ff5252;
   }
 }
 /* END MOBILE RESPONSIVE */
