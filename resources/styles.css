@@ -206,13 +206,14 @@ main {
   width: 800px;
   height: 600px;
   margin: 0 auto;
-  border: 1px solid red;
+  /* border: 1px solid red; */
 }
 
 #color-wheel {
   width: 420px;
   height: 420px;
   margin: 0 auto;
+  margin-top: -30px;
   position: relative;
   overflow: hidden;
   transform: rotate(18deg);
@@ -371,7 +372,7 @@ main {
   font-family: "Patrick Hand", cursive;
   position: relative;
   left: 46.5%;
-  top: 39%;
+  top: 35%;
   font-size: 40px;
   width: 50px;
   text-align: center;
