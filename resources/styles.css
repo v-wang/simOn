@@ -455,6 +455,10 @@ footer div h4 {
     height: 100%;
   }
 
+  body {
+    height: 100%;
+  }
+
   header {
     margin-top: 30px;
     height: 200px;
