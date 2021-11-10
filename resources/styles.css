@@ -451,9 +451,12 @@ footer div h4 {
 /* TODO: FIX HEIGHT OF ELEMS FOR VARIOUS MOBILE SCREEN SIZES */
 /* MOBILE RESPONSIVE */
 @media screen and (max-width: 767px) {
-  body {
-    height: 80vh;
+  html {
+    height: 100%;
   }
+  /* body {
+    height: 80vh;
+  } */
   header {
     margin-top: 30px;
     height: 200px;
