@@ -373,6 +373,10 @@ footer div h4 {
   color: white;
 }
 
+footer a {
+  text-decoration: none;
+}
+
 /* GAME OVER MODAL */
 
 /* START NEW GAME MODAL */
@@ -458,8 +462,7 @@ footer div h4 {
 
   body {
     /* 80? */
-    height: 100vh;
-    overflow-y: hidden;
+    height: 100%;
   }
 
   header {
