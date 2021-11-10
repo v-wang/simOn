@@ -452,10 +452,12 @@ footer div h4 {
 /* MOBILE RESPONSIVE */
 @media screen and (max-width: 767px) {
   html {
+    height: 100vh;
     overflow-y: hidden;
   }
 
   body {
+    /* 80? */
     height: 100vh;
     overflow-y: hidden;
   }
