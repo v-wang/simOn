@@ -272,7 +272,7 @@ newGameButton.addEventListener("click", (event) => {
   // reset score and level
   seqLength = 2;
   scoreNumElem.innerText = 0;
-  levelElem.innerText = playerLevel;
+  levelElem.innerText = 1;
 
   runSequence()
     .then((arr) => {
@@ -284,16 +284,16 @@ newGameButton.addEventListener("click", (event) => {
           setTimeout(() => {
             noteElem.play();
             animateColor(colorElem);
-            if (i == arr.length - 1) {
-              enableClick(newGameButton);
-              colorPieces.forEach((color) => enableClick(color));
-              resolve(arr);
-            }
           }, 1000 * i);
+          if (i == arr.length - 1) {
+            resolve(arr);
+          }
         });
       });
     })
     .then((arr) => {
+      enableClick(newGameButton);
+      colorPieces.forEach((color) => enableClick(color));
       startTimer(timeLeft);
 
       simonColorSequence = arr;

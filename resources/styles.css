@@ -83,7 +83,7 @@ header {
   width: 100vw;
   display: grid;
   grid-template-columns: 33% 33% 33%;
-  margin: 30px 0px 30px 0px;
+  margin: 80px 0px 30px 0px;
 }
 
 header > * {
@@ -114,7 +114,8 @@ header > div > h1 {
   display: inline;
 }
 
-#score-num {
+#score-num,
+#level {
   margin-left: 5px;
 }
 
