@@ -493,8 +493,9 @@ footer div h4 {
   }
 
   main {
-    width: 100vw;
+    width: 400px;
     height: 495px;
+    /* border: 1px solid green; */
   }
 
   #color-wheel {
@@ -503,8 +504,14 @@ footer div h4 {
   }
 
   #timer {
-    left: 47;
-    top: 26%;
+    position: relative;
+    left: 174px;
+    top: 188px;
+
+    overflow: visible;
+    margin-bottom: 60px;
+
+    /* border: 1px solid red; */
   }
 
   footer div {
