@@ -6,59 +6,6 @@
   box-sizing: border-box;
 }
 
-/* MOBILE RESPONSIVE */
-@media (max-width: 767px) {
-  header {
-    display: flex !important;
-    flex-direction: column !important;
-  }
-
-  header > * > h1 {
-    font-size: 18px;
-  }
-
-  #logo-holder {
-    margin-top: 25px;
-    margin-bottom: 22px;
-  }
-
-  #logo-holder img {
-    width: 50px;
-    display: block;
-    margin: 0 auto;
-    margin-bottom: 10px;
-    /* border: 1px solid green; */
-  }
-
-  main {
-    width: 100vw !important;
-    height: 495px !important;
-  }
-
-  #color-wheel {
-    width: 260px !important;
-    height: 260px !important;
-  }
-
-  #timer {
-    left: 44% !important;
-    top: 31% !important;
-  }
-
-  footer div {
-    margin-top: 5px;
-  }
-
-  footer div img {
-    width: 20px;
-  }
-
-  footer div h4 {
-    font-size: 12px;
-  }
-}
-/* END MOBILE RESPONSIVE */
-
 /* GENERAL */
 body {
   font-family: "Nunito", sans-serif;
@@ -199,6 +146,19 @@ header > div > h1 {
   border-radius: 50px 50px 10% 10%;
   transform: rotate(180deg);
 }
+
+/* #simon-body {
+  position: absolute;
+  width: 50px;
+  height: 20px;
+  background-color: #c68642;
+  position: relative;
+  top: -10px;
+  left: 18px;
+  font-weight: bold;
+  border-radius: 25%;
+  z-index: -2;
+} */
 
 /* GAME SECTION */
 /* COLOR WHEEL, INDIVIDUAL COLOR PIECES, NEW GAME BUTTON */
@@ -482,3 +442,81 @@ footer div h4 {
 .hide {
   display: none;
 }
+
+/* MOBILE RESPONSIVE */
+@media screen and (max-width: 767px) {
+  header {
+    margin-top: 30px;
+    height: 200px;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 33% 33% 33%;
+  }
+
+  header > * {
+    /* border: 1px solid green; */
+  }
+
+  header > div > h1 {
+    font-size: 24px;
+  }
+
+  #simon-container {
+    grid-column: 1 / span 2;
+    grid-row: 1;
+    height: 85px;
+    margin-top: 15px;
+  }
+
+  #head {
+    margin-top: 5px;
+  }
+
+  #logo-holder {
+    grid-column: 1 / span 2;
+    grid-row: 2;
+    margin-top: 30px;
+  }
+
+  #level-holder {
+    grid-column: 1;
+    grid-row: 3;
+    margin-right: 20px;
+    margin-top: 0px;
+  }
+
+  #score-holder {
+    grid-column: 2;
+    grid-row: 3;
+    margin-left: 20px;
+    margin-top: 0px;
+  }
+
+  main {
+    width: 100vw;
+    height: 495px;
+  }
+
+  #color-wheel {
+    width: 260px;
+    height: 260px;
+  }
+
+  #timer {
+    left: 47;
+    top: 26%;
+  }
+
+  footer div {
+    margin-top: 5px;
+  }
+
+  footer div img {
+    width: 20px;
+  }
+
+  footer div h4 {
+    font-size: 12px;
+  }
+}
+/* END MOBILE RESPONSIVE */
