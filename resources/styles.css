@@ -516,7 +516,7 @@ footer a {
 
   main {
     width: 300px;
-    height: calc(var(--vh, 1vh) * 60);
+    height: 470px;
     margin-top: -30px;
   }
 
