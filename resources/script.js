@@ -1,8 +1,10 @@
 // MOBILE DISAPPEARING BROWSER BAR
-window.addEventListener("resize", () => {
-  let vh = window.innerHeight;
-  document.documentElement.style.setProperty("--vh", `${vh}px`);
-});
+// window.addEventListener("resize", () => {
+//   let vh = window.innerHeight;
+//   document.documentElement.style.setProperty("--vh", `${vh}px`);
+//   console.log(vh);
+
+// });
 
 // DOM ELEMENTS
 
