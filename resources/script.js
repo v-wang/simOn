@@ -1,3 +1,13 @@
+// MOBILE DISAPPEARING BROWSER BAR
+const appHeight = () => {
+  document.documentElement.style.setProperty(
+    "--app-height",
+    `${window.innerHeight}px`
+  );
+};
+window.addEventListener("resize", appHeight);
+appHeight();
+
 // DOM ELEMENTS
 
 // get all individual color pieces

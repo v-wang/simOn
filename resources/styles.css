@@ -454,11 +454,11 @@ footer a {
 /* MOBILE RESPONSIVE */
 @media screen and (max-width: 767px) {
   html {
-    overflow-y: hidden;
+    height: var(--app-height, 100vh);
   }
 
   body {
-    height: calc(100vh - calc(100vh - 100%));
+    height: var(--app-height, 100vh);
   }
 
   header {
