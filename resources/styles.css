@@ -454,14 +454,11 @@ footer a {
 /* MOBILE RESPONSIVE */
 @media screen and (max-width: 767px) {
   html {
-    height: 100%;
-    height: -webkit-fill-available;
+    overflow-y: hidden;
   }
 
   body {
-    /* 80? */
-    /* height: 100%; */
-    /* overflow-y: hidden; */
+    height: calc(100vh - calc(100vh - 100%));
   }
 
   header {
