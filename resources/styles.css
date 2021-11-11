@@ -466,6 +466,11 @@ footer a {
 /* TODO: FIX HEIGHT OF ELEMS FOR VARIOUS MOBILE SCREEN SIZES */
 /* MOBILE RESPONSIVE */
 @media screen and (max-width: 767px) {
+  html {
+    height: 100vh;
+    height: var(--vh, 1vh);
+  }
+
   body {
     height: 100vh;
     height: var(--vh, 1vh);
