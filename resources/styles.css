@@ -466,11 +466,12 @@ footer a {
   html {
     height: 100vh;
     height: calc(var(--vh, 1vh) * 100);
-    overflow-y: hidden;
+    /* overflow-y: hidden; */
   }
 
   body {
-    height: 100%;
+    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
     /* height: 100vh;
     height: calc(var(--vh, 1vh) * 100);
     overflow-y: hidden; */
