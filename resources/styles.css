@@ -29,7 +29,7 @@ header {
   width: 100vw;
   display: grid;
   height: 120px;
-  grid-template-columns: 33% 33% 33%;
+  grid-template-columns: 33.33% 33.33% 33.33%;
   grid-template-rows: 50% 50%;
   /* margin: 80px 0px 30px 0px; */
   align-items: center;
@@ -466,6 +466,11 @@ footer a {
 /* TODO: FIX HEIGHT OF ELEMS FOR VARIOUS MOBILE SCREEN SIZES */
 /* MOBILE RESPONSIVE */
 @media screen and (max-width: 767px) {
+  html {
+    height: 100vh;
+    height: calc(var(--vh, 1vh) * 100);
+  }
+
   body {
     height: 100vh;
     height: calc(var(--vh, 1vh) * 100);
