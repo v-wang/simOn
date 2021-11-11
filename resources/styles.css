@@ -362,6 +362,7 @@ footer {
   display: grid;
   grid-template-columns: 33% 33% 33%;
   background-color: #2d3436;
+  z-index: 10;
 }
 
 footer img {
@@ -464,8 +465,8 @@ footer a {
 /* MOBILE RESPONSIVE */
 @media screen and (max-width: 767px) {
   html {
-    height: 100vh;
-    height: calc(var(--vh, 1vh) * 100);
+    /* height: 100vh;
+    height: calc(var(--vh, 1vh) * 100); */
     /* overflow-y: hidden; */
   }
 
