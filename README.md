@@ -1,6 +1,6 @@
 # simOn Game
 
-<img src="./resources/img/gameplay.gif" alt="gif of simOn gameplay" style="max-width: 200px;">
+<img src="./resources/img/gameplay.gif" alt="gif of simOn gameplay" width="200">
 <br/><br/>
 
 ## About
@@ -10,6 +10,8 @@ simOn, a memory game, is a version of Simon Says. At the start of each round, Si
 **[PLAY HERE](https://pages.git.generalassemb.ly/v-wang/simon/)**
 
 ---
+
+<br/><br/>
 
 ## Game Instructions
 
