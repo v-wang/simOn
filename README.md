@@ -43,9 +43,6 @@ Feel free to track our progress.
 
 [simOn updates](https://thewangspace.notion.site/fade178304704ae5a2c748a2b21be50b?v=4962ddbbc4324b3c938f7df57dbbeec5)
 
-- [ ] Multi color wheels
-- [ ] Two tier difficulty
-
 ## Suggestions
 
 Do you have an idea to improve the game? Feel free to send bug reports and/or feature requests to <midnightcoffeecode@gmail.com>
