@@ -540,7 +540,7 @@ footer a {
     position: absolute;
     left: 10%;
     right: 10%;
-    top: 70%;
+    top: 60%;
     /* position: absolute;
     bottom: calc(var(--vh, 1vh) * 20); */
   }
