@@ -1,6 +1,6 @@
 # simOn Game
 
-<img src="./resources/img/gameplay.gif" alt="gif of simOn gameplay" style="width: 200px !important;">
+<img src="./resources/img/gameplay.gif" alt="gif of simOn gameplay" style="max-width: 200px;">
 <br/><br/>
 
 ## About
