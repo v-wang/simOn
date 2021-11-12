@@ -39,7 +39,7 @@ Challenge yourself to see how far you can get! There is no final level. Hopefull
 
 ## Upcoming Features
 
-We hope to add more to simOn. Here's a shortlist of features up for consideration. Feel free to track our progress!
+Feel free to track our progress.
 
 [simOn updates](https://thewangspace.notion.site/fade178304704ae5a2c748a2b21be50b?v=4962ddbbc4324b3c938f7df57dbbeec5)
 
