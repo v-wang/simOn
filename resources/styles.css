@@ -467,12 +467,13 @@ footer a {
 /* MOBILE RESPONSIVE */
 @media screen and (max-width: 767px) {
   /* html {
+    height: 100%;
     height: var(--vh);
     min-height: -webkit-fill-available;
   } */
 
   body {
-    min-height: 90vh;
+    min-height: 100%;
     /* min-height: -webkit-fill-available; */
   }
 
