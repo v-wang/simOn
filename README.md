@@ -34,7 +34,7 @@ Challenge yourself to see how far you can get! There is no final level. Hopefull
 
 ## Installation
 
-- No setup is required!
+- No setup is required
 - simOn is optimized for mobile
 
 ## Upcoming Features

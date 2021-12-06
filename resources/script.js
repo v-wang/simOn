@@ -1,40 +1,41 @@
-// MOBILE DISAPPEARING BROWSER BAR
+// TODO: iOS MOBILE DISAPPEARING BROWSER BAR
+// Account for 100vh when page renders and broswer bar dissapears
 // window.addEventListener("resize", () => {
 //   let vh = window.innerHeight;
 //   document.documentElement.style.setProperty("--vh", `${vh}px`);
 //   console.log(vh);
-
 // });
 
 // DOM ELEMENTS
 
 // get all individual color pieces
-const colorPieces = document.querySelectorAll(".color-piece");
+const colorPieces = document.querySelectorAll('.color-piece');
 // console.log(colorPieces);
 
 // get new game button
-const newGameButton = document.querySelector("#new-game");
+const newGameButton = document.querySelector('#new-game');
 
 // get start over button
-const startOverButton = document.querySelectorAll(".start-over");
+const startOverButton = document.querySelectorAll('.start-over');
 
 // get modal holder
-const modalHolder = document.querySelector("#modal-holder");
+const modalHolder = document.querySelector('#modal-holder');
 
 // global timer elem
-let timerElemTime = document.querySelector("#timer");
+let timerElemTime = document.querySelector('#timer');
 
+// When game resumes and option to restart is presented to player
 startOverButton.forEach((button) => {
-  button.addEventListener("click", () => {
-    modalHolder.classList.toggle("hide");
+  button.addEventListener('click', () => {
+    modalHolder.classList.toggle('hide');
     if (
-      button.parentElement.parentElement.getAttribute("id") == "welcome-back"
+      button.parentElement.parentElement.getAttribute('id') == 'welcome-back'
     ) {
-      welcomeBackModal.classList.toggle("hide");
+      welcomeBackModal.classList.toggle('hide');
     } else if (
-      button.parentElement.parentElement.getAttribute("id") == "game-over"
+      button.parentElement.parentElement.getAttribute('id') == 'game-over'
     ) {
-      gameOverModal.classList.toggle("hide");
+      gameOverModal.classList.toggle('hide');
     }
     localStorage.clear();
     levelElem.innerText = playerLevel;
@@ -44,10 +45,10 @@ startOverButton.forEach((button) => {
 });
 
 // get welcome back modal
-const welcomeBackModal = document.querySelector("#welcome-back");
+const welcomeBackModal = document.querySelector('#welcome-back');
 
 // get game over modal
-const gameOverModal = document.querySelector("#game-over");
+const gameOverModal = document.querySelector('#game-over');
 
 // SIMON SIDE
 // NOTE: The following lines are related to Simon and covers basic functionality of the game. Random numbers are being created. Those numbers are being translated to color strings.
@@ -85,22 +86,22 @@ function numToColor(arr) {
   let colorSequence = [];
   for (let i = 0; i < arr.length; i++) {
     if (arr[i] >= 0 && arr[i] <= 5) {
-      arr[i] = "purple";
+      arr[i] = 'purple';
       colorSequence.push(arr[i]);
     } else if (arr[i] > 5 && arr[i] <= 10) {
-      arr[i] = "orange";
+      arr[i] = 'orange';
       colorSequence.push(arr[i]);
     } else if (arr[i] > 10 && arr[i] <= 15) {
-      arr[i] = "red";
+      arr[i] = 'red';
       colorSequence.push(arr[i]);
     } else if (arr[i] > 15 && arr[i] <= 20) {
-      arr[i] = "blue";
+      arr[i] = 'blue';
       colorSequence.push(arr[i]);
     } else if (arr[i] > 20 && arr[i] <= 25) {
-      arr[i] = "yellow";
+      arr[i] = 'yellow';
       colorSequence.push(arr[i]);
     } else if (arr[i] > 25 && arr[i] <= 30) {
-      arr[i] = "green";
+      arr[i] = 'green';
       colorSequence.push(arr[i]);
     }
   }
@@ -124,9 +125,9 @@ function runSequence() {
 
 // COLOR FLASHING EFFECT FOR PIECES
 function animateColor(color) {
-  color.classList.add("shimmer");
+  color.classList.add('shimmer');
   setTimeout(() => {
-    color.classList.toggle("shimmer");
+    color.classList.toggle('shimmer');
   }, 500);
 }
 
@@ -135,10 +136,10 @@ function animateColor(color) {
 
 // GLOBAL VARIABLES RELATED TO PLAYER
 // get score num element
-let scoreNumElem = document.querySelector("#score-num");
+let scoreNumElem = document.querySelector('#score-num');
 
 // get level elem
-let levelElem = document.querySelector("#level");
+let levelElem = document.querySelector('#level');
 
 // player level - default set to level 1
 let playerLevel = 1;
@@ -150,7 +151,7 @@ let playerScore = 0;
 let timeLeft = 5;
 let timer;
 function startTimer(max) {
-  let timerElem = document.querySelector("#timer");
+  let timerElem = document.querySelector('#timer');
   timer = setInterval(() => {
     if (max <= 0) {
       gameOver();
@@ -167,16 +168,16 @@ function resetTimer() {
 }
 
 function gameOver() {
-  modalHolder.classList.toggle("hide");
-  gameOverModal.classList.toggle("hide");
-  newGameButton.classList.toggle("bounce");
+  modalHolder.classList.toggle('hide');
+  gameOverModal.classList.toggle('hide');
+  newGameButton.classList.toggle('bounce');
 }
 
 // MAIN BLOCK FOR GAME LOGIC
 // checks if player color selection is correct
 function seqChecker(piece) {
   // getting color id, ex: "blue"
-  let cPieceValue = piece.getAttribute("id");
+  let cPieceValue = piece.getAttribute('id');
 
   // checking player color selection against simon
   if (cPieceValue == simonColorSequence[simonIndex]) {
@@ -184,7 +185,7 @@ function seqChecker(piece) {
 
     // if it's the last color to check, move on to next round
     if (simonIndex == simonColorSequence.length - 1) {
-      console.log("nice, you won this round! get ready for the next one!");
+      console.log('nice, you won this round! get ready for the next one!');
       clearInterval(timer);
 
       // update player score after win
@@ -216,7 +217,7 @@ function seqChecker(piece) {
             return new Promise((resolve) => {
               arr.forEach((color, i) => {
                 let colorElem = document.querySelector(`#${color}`);
-                let note = colorElem.getAttribute("data");
+                let note = colorElem.getAttribute('data');
                 let noteElem = document.querySelector(`#${note}`);
                 setTimeout(() => {
                   noteElem.play();
@@ -245,9 +246,9 @@ function seqChecker(piece) {
     clearInterval(timer);
     localStorage.clear();
     // wrong color choice - player losers
-    modalHolder.classList.toggle("hide");
-    gameOverModal.classList.toggle("hide");
-    newGameButton.classList.toggle("bounce");
+    modalHolder.classList.toggle('hide');
+    gameOverModal.classList.toggle('hide');
+    newGameButton.classList.toggle('bounce');
 
     simonColorSequence = [];
     return (simonIndex = 0);
@@ -256,16 +257,16 @@ function seqChecker(piece) {
 
 // prevent click event while simon goes
 function disableClick(color) {
-  color.classList.toggle("prevent-click");
+  color.classList.toggle('prevent-click');
 }
 
 // readd click event
 function enableClick(button) {
-  button.classList.toggle("prevent-click");
+  button.classList.toggle('prevent-click');
 }
 
 // START NEW GAME ON CLICK
-newGameButton.addEventListener("click", (event) => {
+newGameButton.addEventListener('click', (event) => {
   event.preventDefault();
   colorPieces.forEach((color) => disableClick(color));
   disableClick(newGameButton);
@@ -275,7 +276,7 @@ newGameButton.addEventListener("click", (event) => {
   timerElemTime.innerText = 5;
 
   // remove bounce effect
-  newGameButton.classList.toggle("bounce");
+  newGameButton.classList.toggle('bounce');
 
   // reset score and level
   seqLength = 2;
@@ -287,7 +288,7 @@ newGameButton.addEventListener("click", (event) => {
       return new Promise((resolve) => {
         arr.forEach((color, i) => {
           let colorElem = document.querySelector(`#${color}`);
-          let note = colorElem.getAttribute("data");
+          let note = colorElem.getAttribute('data');
           let noteElem = document.querySelector(`#${note}`);
           setTimeout(() => {
             noteElem.play();
@@ -311,14 +312,14 @@ newGameButton.addEventListener("click", (event) => {
 });
 
 colorPieces.forEach((cPiece) => {
-  cPiece.addEventListener("click", (event) => {
+  cPiece.addEventListener('click', (event) => {
     event.preventDefault();
 
     if (simonColorSequence.length < 2) {
-      console.log("start a new game first");
+      console.log('start a new game first');
     } else {
       // play sound
-      let notePiece = cPiece.getAttribute("data");
+      let notePiece = cPiece.getAttribute('data');
       document.getElementById(notePiece).play();
 
       seqChecker(cPiece);
@@ -337,16 +338,16 @@ function getCurrentStats() {
 // save locally
 function saveToLocal() {
   let currentStats = getCurrentStats();
-  localStorage.setItem("level", `${currentStats.level}`);
-  localStorage.setItem("score", `${currentStats.score}`);
-  localStorage.setItem("seq", `${currentStats.seq}`);
+  localStorage.setItem('level', `${currentStats.level}`);
+  localStorage.setItem('score', `${currentStats.score}`);
+  localStorage.setItem('seq', `${currentStats.seq}`);
 }
 
 // get local info after saving
 function getLocal() {
-  let lastLevel = localStorage.getItem("level");
-  let lastScore = localStorage.getItem("score");
-  let lastSeq = localStorage.getItem("seq");
+  let lastLevel = localStorage.getItem('level');
+  let lastScore = localStorage.getItem('score');
+  let lastSeq = localStorage.getItem('seq');
   return { level: `${lastLevel}`, score: `${lastScore}`, seq: `${lastSeq}` };
 }
 
@@ -354,11 +355,11 @@ function getLocal() {
 // if not, start new game
 function resumeGameChecker() {
   let localData = getLocal();
-  if (localData.level.includes("null")) {
-    console.log("no record");
+  if (localData.level.includes('null')) {
+    console.log('no record');
   } else {
-    modalHolder.classList.toggle("hide");
-    welcomeBackModal.classList.toggle("hide");
+    modalHolder.classList.toggle('hide');
+    welcomeBackModal.classList.toggle('hide');
     levelElem.innerText = localData.level;
     scoreNumElem.innerText = localData.score;
   }
@@ -367,19 +368,19 @@ resumeGameChecker();
 
 // TODO: refactor this and add to 'new button'
 // CONTINUING THE GAME
-const contGameButton = document.querySelector("#continue-game");
+const contGameButton = document.querySelector('#continue-game');
 
-contGameButton.addEventListener("click", (event) => {
+contGameButton.addEventListener('click', (event) => {
   event.preventDefault();
-  modalHolder.classList.toggle("hide");
-  welcomeBackModal.classList.toggle("hide");
+  modalHolder.classList.toggle('hide');
+  welcomeBackModal.classList.toggle('hide');
 
   // stop timer & reset
   // clearInterval(timer);
   timerElemTime.innerText = 5;
 
   // remove bounce effect
-  newGameButton.classList.toggle("bounce");
+  newGameButton.classList.toggle('bounce');
 
   // set last stats
   let resumeStats = getLocal();
@@ -395,7 +396,7 @@ contGameButton.addEventListener("click", (event) => {
         return new Promise((resolve) => {
           arr.forEach((color, i) => {
             let colorElem = document.querySelector(`#${color}`);
-            let note = colorElem.getAttribute("data");
+            let note = colorElem.getAttribute('data');
             let noteElem = document.querySelector(`#${note}`);
             setTimeout(() => {
               noteElem.play();
@@ -412,7 +413,7 @@ contGameButton.addEventListener("click", (event) => {
           startTimer(timeLeft);
         }, 800);
         simonColorSequence = arr;
-        console.log(simonColorSequence);
+        // console.log(simonColorSequence);
         return simonColorSequence;
       });
   }, 2000);
